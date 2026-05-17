@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>LNS CARz | Admin Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/font-awesome.min.css') }}">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Lato', sans-serif;
+            background: #f4f6f9;
+            color: #111827;
+        }
+
+        .admin-layout {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 260px;
+            background: #111827;
+            color: #ffffff;
+            padding: 24px 18px;
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+        }
+
+        .logo {
+            font-size: 26px;
+            font-weight: 900;
+            margin-bottom: 34px;
+            letter-spacing: 1px;
+        }
+
+        .logo span {
+            color: #e53935;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #d1d5db;
+            text-decoration: none;
+            padding: 13px 14px;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            transition: 0.2s;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            background: #e53935;
+            color: #ffffff;
+        }
+
+        .logout {
+            margin-top: 30px;
+            background: #374151;
+        }
+
+        .main {
+            margin-left: 260px;
+            width: calc(100% - 260px);
+            padding: 28px;
+        }
+
+        .topbar {
+            background: #ffffff;
+            padding: 20px 24px;
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 26px;
+        }
+
+        .topbar h1 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: 900;
+        }
+
+        .topbar p {
+            margin: 4px 0 0;
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        .admin-user {
+            font-size: 14px;
+            font-weight: 800;
+            color: #e53935;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+            margin-bottom: 28px;
+        }
+
+        .card {
+            background: #ffffff;
+            padding: 24px;
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+            border-left: 5px solid #e53935;
+        }
+
+        .card-icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(229, 57, 53, 0.1);
+            color: #e53935;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            margin-bottom: 14px;
+        }
+
+        .card h2 {
+            margin: 0;
+            font-size: 32px;
+            font-weight: 900;
+        }
+
+        .card p {
+            margin: 6px 0 0;
+            color: #6b7280;
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        .section {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+            margin-bottom: 26px;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 18px;
+        }
+
+        .section-header h3 {
+            margin: 0;
+            font-size: 18px;
+            font-weight: 900;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #e53935;
+            color: #ffffff;
+            padding: 10px 16px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 900;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            text-align: left;
+            background: #f9fafb;
+            color: #374151;
+            padding: 13px;
+            font-size: 13px;
+            font-weight: 900;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        td {
+            padding: 13px;
+            border-bottom: 1px solid #e5e7eb;
+            font-size: 13px;
+            color: #374151;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 900;
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .empty {
+            text-align: center;
+            color: #9ca3af;
+            padding: 24px;
+            font-size: 14px;
+        }
+
+        @media(max-width: 900px) {
+            .sidebar {
+                position: relative;
+                width: 100%;
+                height: auto;
+            }
+
+            .admin-layout {
+                display: block;
+            }
+
+            .main {
+                margin-left: 0;
+                width: 100%;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+            .topbar {
+                display: block;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="admin-layout">
+
+        <aside class="sidebar">
+            <div class="logo">LNS <span>CARz</span></div>
+
+            <a href="{{ url_for('admin_dashboard') }}" class="nav-link active">
+                <i class="fa fa-dashboard"></i> Dashboard
+            </a>
+
+            <a href="{{ url_for('admin_sell_requests') }}" class="nav-link">
+                <i class="fa fa-money"></i> Sell Requests
+            </a>
+
+            <a href="{{ url_for('admin_reports') }}" class="nav-link">
+                <i class="fa fa-bar-chart"></i> Reports
+            </a>
+
+            <a href="{{ url_for('home') }}" class="nav-link">
+                <i class="fa fa-globe"></i> View Website
+            </a>
+
+            <a href="{{ url_for('admin_logout') }}" class="nav-link logout">
+                <i class="fa fa-sign-out"></i> Logout
+            </a>
+        </aside>
+
+        <main class="main">
+
+            <div class="topbar">
+                <div>
+                    <h1>Admin Dashboard</h1>
+                    <p>Manage LNS CARz vehicles, customer inquiries, and sell requests.</p>
+                </div>
+                <div class="admin-user">
+                    <i class="fa fa-user-circle"></i>
+                    {{ session.get('admin_username', 'Admin') }}
+                </div>
+            </div>
+
+            <div class="cards">
+                <div class="card">
+                    <div class="card-icon">
+                        <i class="fa fa-car"></i>
+                    </div>
+                    <h2>{{ total_vehicles }}</h2>
+                    <p>Total Vehicles</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">
+                        <i class="fa fa-envelope"></i>
+                    </div>
+                    <h2>{{ total_inquiries }}</h2>
+                    <p>Total Inquiries</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">
+                        <i class="fa fa-money"></i>
+                    </div>
+                    <h2>{{ total_sell_requests }}</h2>
+                    <p>Sell Requests</p>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-header">
+                    <h3>Latest Sell Requests</h3>
+                    <a href="{{ url_for('admin_sell_requests') }}" class="btn">View All</a>
+                </div>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Mobile</th>
+                            <th>Vehicle</th>
+                            <th>District</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% if latest_sell_requests %}
+                        {% for req in latest_sell_requests %}
+                        <tr>
+                            <td>{{ req.full_name }}</td>
+                            <td>{{ req.mobile_number }}</td>
+                            <td>{{ req.vehicle_brand }} {{ req.vehicle_model }}</td>
+                            <td>{{ req.district }}</td>
+                            <td><span class="status">{{ req.status }}</span></td>
+                        </tr>
+                        {% endfor %}
+                        {% else %}
+                        <tr>
+                            <td colspan="5" class="empty">No sell requests yet.</td>
+                        </tr>
+                        {% endif %}
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="section">
+                <div class="section-header">
+                    <h3>Latest Inquiries</h3>
+                    <a href="{{ url_for('admin_inquiries') }}" class="btn">View All</a>
+                </div>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Message</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% if latest_inquiries %}
+                        {% for inquiry in latest_inquiries %}
+                        <tr>
+                            <td>{{ inquiry.name }}</td>
+                            <td>{{ inquiry.email }}</td>
+                            <td>{{ inquiry.phone }}</td>
+                            <td>{{ inquiry.message[:60] }}...</td>
+                        </tr>
+                        {% endfor %}
+                        {% else %}
+                        <tr>
+                            <td colspan="4" class="empty">No inquiries yet.</td>
+                        </tr>
+                        {% endif %}
+                    </tbody>
+                </table>
+            </div>
+
+        </main>
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>{{ car.vehicle_brand }} {{ car.vehicle_model }} | LNS CARz</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/font-awesome.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <style>
+        body {
+            font-family: 'Lato', sans-serif;
+            background: #f5f5f5;
+        }
+
+        .view-wrapper {
+            padding: 60px 0;
+        }
+
+        .detail-card {
+            background: #fff;
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.09);
+            border-top: 4px solid #e53935;
+        }
+
+        .vehicle-img {
+            width: 100%;
+            height: 430px;
+            object-fit: cover;
+            background: #eee;
+        }
+
+        .detail-content {
+            padding: 34px;
+        }
+
+        .badge-sale {
+            display: inline-block;
+            background: #e53935;
+            color: #fff;
+            padding: 7px 14px;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: 900;
+            text-transform: uppercase;
+            margin-bottom: 14px;
+        }
+
+        .title {
+            font-size: 34px;
+            font-weight: 900;
+            color: #111;
+            margin-bottom: 10px;
+        }
+
+        .price {
+            color: #e53935;
+            font-size: 26px;
+            font-weight: 900;
+            margin-bottom: 24px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 14px;
+            margin-bottom: 28px;
+        }
+
+        .info-box {
+            background: #fafafa;
+            border: 1px solid #eee;
+            border-radius: 12px;
+            padding: 15px;
+        }
+
+        .info-box span {
+            display: block;
+            font-size: 12px;
+            color: #777;
+            font-weight: 900;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+
+        .info-box strong {
+            font-size: 15px;
+            color: #111;
+            font-weight: 900;
+        }
+
+        .notes-box {
+            background: #fff5f5;
+            border: 1px solid rgba(229, 57, 53, 0.18);
+            border-radius: 12px;
+            padding: 18px;
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 28px;
+        }
+
+        .actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .btn-main {
+            background: #e53935;
+            color: #fff;
+            padding: 13px 22px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 900;
+        }
+
+        .btn-dark {
+            background: #111;
+            color: #fff;
+            padding: 13px 22px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 900;
+        }
+
+        .btn-main:hover,
+        .btn-dark:hover {
+            color: #fff;
+            text-decoration: none;
+            opacity: .9;
+        }
+
+        @media(max-width: 768px) {
+            .vehicle-img {
+                height: 260px;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .title {
+                font-size: 26px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <section class="view-wrapper">
+        <div class="container">
+            <div class="detail-card">
+                {% if car.vehicle_image %}
+                <img src="{{ url_for('static', filename=car.vehicle_image) }}"
+                    alt="{{ car.vehicle_brand }} {{ car.vehicle_model }}" class="vehicle-img">
+                {% else %}
+                <img src="{{ url_for('static', filename='img/cars/car-1.jpg') }}"
+                    alt="{{ car.vehicle_brand }} {{ car.vehicle_model }}" class="vehicle-img">
+                {% endif %}
+
+                <div class="detail-content">
+                    <span class="badge-sale">For Sale</span>
+
+                    <h1 class="title">{{ car.vehicle_brand }} {{ car.vehicle_model }}</h1>
+
+                    <div class="price">
+                        LKR {{ "{:,.0f}".format(car.expected_price_min or 0) }}
+                        -
+                        {{ "{:,.0f}".format(car.expected_price_max or 0) }}
+                    </div>
+
+                    <div class="info-grid">
+                        <div class="info-box">
+                            <span>Manufacture Year</span>
+                            <strong>{{ car.manufacture_year }}</strong>
+                        </div>
+
+                        <div class="info-box">
+                            <span>Mileage</span>
+                            <strong>{{ car.mileage }}</strong>
+                        </div>
+
+                        <div class="info-box">
+                            <span>Fuel Type</span>
+                            <strong>{{ car.fuel_type }}</strong>
+                        </div>
+
+                        <div class="info-box">
+                            <span>Transmission</span>
+                            <strong>{{ car.transmission }}</strong>
+                        </div>
+
+                        <div class="info-box">
+                            <span>Body Type</span>
+                            <strong>{{ car.body_type or '-' }}</strong>
+                        </div>
+
+                        <div class="info-box">
+                            <span>Colour</span>
+                            <strong>{{ car.vehicle_colour or '-' }}</strong>
+                        </div>
+
+                        <div class="info-box">
+                            <span>Condition</span>
+                            <strong>{{ car.vehicle_condition }}</strong>
+                        </div>
+
+                        <div class="info-box">
+                            <span>Previous Owners</span>
+                            <strong>{{ car.previous_owners or '-' }}</strong>
+                        </div>
+
+                        <div class="info-box">
+                            <span>Registration Number</span>
+                            <strong>{{ car.registration_number or '-' }}</strong>
+                        </div>
+
+                        <div class="info-box">
+                            <span>District</span>
+                            <strong>{{ car.district }}</strong>
+                        </div>
+
+                        <div class="info-box">
+                            <span>Insurance</span>
+                            <strong>{{ car.insurance_status or '-' }}</strong>
+                        </div>
+
+                        <div class="info-box">
+                            <span>Fault Status</span>
+                            <strong>{{ car.fault_status or '-' }}</strong>
+                        </div>
+                    </div>
+
+                    <h4 style="font-weight:900;color:#111;margin-bottom:12px;">Additional Notes</h4>
+                    <div class="notes-box">
+                        {{ car.notes or 'No additional notes available.' }}
+                    </div>
+
+                    <div class="actions">
+                        <a href="{{ url_for('contact') }}" class="btn-main">
+                            <i class="fa fa-envelope"></i> Enquire Now
+                        </a>
+
+                        <a href="https://wa.me/94754289843" target="_blank" class="btn-dark">
+                            <i class="fa fa-whatsapp"></i> WhatsApp
+                        </a>
+
+                        <a href="{{ url_for('cars') }}" class="btn-dark">
+                            <i class="fa fa-arrow-left"></i> Back to Cars
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</body>
+
+</html>

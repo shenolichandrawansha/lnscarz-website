@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>LNS CARz | Admin Reports</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/font-awesome.min.css') }}">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Lato', sans-serif;
+            background: #f4f6f9;
+            color: #111827;
+        }
+
+        .admin-layout {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 260px;
+            background: #111827;
+            color: #ffffff;
+            padding: 24px 18px;
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+        }
+
+        .logo {
+            font-size: 26px;
+            font-weight: 900;
+            margin-bottom: 34px;
+            letter-spacing: 1px;
+        }
+
+        .logo span {
+            color: #e53935;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #d1d5db;
+            text-decoration: none;
+            padding: 13px 14px;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            transition: 0.2s;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            background: #e53935;
+            color: #ffffff;
+        }
+
+        .logout {
+            margin-top: 30px;
+            background: #374151;
+        }
+
+        .main {
+            margin-left: 260px;
+            width: calc(100% - 260px);
+            padding: 28px;
+        }
+
+        .topbar {
+            background: #ffffff;
+            padding: 22px 24px;
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+            margin-bottom: 26px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .topbar h1 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: 900;
+        }
+
+        .topbar p {
+            margin: 5px 0 0;
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        .print-btn {
+            border: none;
+            background: #111827;
+            color: #ffffff;
+            padding: 12px 18px;
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 900;
+            cursor: pointer;
+        }
+
+        .print-btn:hover {
+            background: #e53935;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+            margin-bottom: 26px;
+        }
+
+        .card {
+            background: #ffffff;
+            padding: 22px;
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+            border-left: 5px solid #e53935;
+        }
+
+        .card-icon {
+            width: 46px;
+            height: 46px;
+            background: rgba(229, 57, 53, 0.1);
+            color: #e53935;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 21px;
+            margin-bottom: 12px;
+        }
+
+        .card h2 {
+            margin: 0;
+            font-size: 30px;
+            font-weight: 900;
+        }
+
+        .card p {
+            margin: 6px 0 0;
+            color: #6b7280;
+            font-weight: 700;
+            font-size: 13px;
+        }
+
+        .report-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 22px;
+        }
+
+        .section {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+        }
+
+        .section h3 {
+            margin: 0 0 18px;
+            font-size: 18px;
+            font-weight: 900;
+            color: #111827;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background: #f9fafb;
+            color: #374151;
+            text-align: left;
+            padding: 13px;
+            font-size: 13px;
+            font-weight: 900;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        td {
+            padding: 13px;
+            border-bottom: 1px solid #e5e7eb;
+            font-size: 13px;
+            color: #374151;
+            font-weight: 700;
+        }
+
+        .status-pill {
+            display: inline-block;
+            padding: 6px 11px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 900;
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .status-pill.Approved {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .status-pill.Rejected {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .status-pill.Contacted {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+
+        .status-pill.Completed {
+            background: #ede9fe;
+            color: #5b21b6;
+        }
+
+        .empty {
+            color: #9ca3af;
+            text-align: center;
+            padding: 22px;
+        }
+
+        @media(max-width: 1000px) {
+            .cards {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .report-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media(max-width: 800px) {
+            .sidebar {
+                position: relative;
+                width: 100%;
+                height: auto;
+            }
+
+            .admin-layout {
+                display: block;
+            }
+
+            .main {
+                margin-left: 0;
+                width: 100%;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+            .topbar {
+                display: block;
+            }
+
+            .print-btn {
+                margin-top: 14px;
+            }
+        }
+
+        @media print {
+
+            .sidebar,
+            .print-btn {
+                display: none;
+            }
+
+            .main {
+                margin-left: 0;
+                width: 100%;
+            }
+
+            body {
+                background: #ffffff;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="admin-layout">
+
+        <aside class="sidebar">
+            <div class="logo">LNS <span>CARz</span></div>
+
+            <a href="{{ url_for('admin_dashboard') }}" class="nav-link">
+                <i class="fa fa-dashboard"></i> Dashboard
+            </a>
+
+            <a href="{{ url_for('admin_sell_requests') }}" class="nav-link">
+                <i class="fa fa-money"></i> Sell Requests
+            </a>
+
+            <a href="{{ url_for('admin_reports') }}" class="nav-link active">
+                <i class="fa fa-bar-chart"></i> Reports
+            </a>
+
+            <a href="{{ url_for('home') }}" class="nav-link">
+                <i class="fa fa-globe"></i> View Website
+            </a>
+
+            <a href="{{ url_for('admin_logout') }}" class="nav-link logout">
+                <i class="fa fa-sign-out"></i> Logout
+            </a>
+        </aside>
+
+        <main class="main">
+
+            <div class="topbar">
+                <div>
+                    <h1>Admin Reports</h1>
+                    <p>Summary report of sell requests, approved vehicles, pending requests, rejected requests, and
+                        inquiries.</p>
+                </div>
+
+                <button onclick="window.print()" class="print-btn">
+                    <i class="fa fa-print"></i> Print Report
+                </button>
+            </div>
+
+            <div class="cards">
+                <div class="card">
+                    <div class="card-icon">
+                        <i class="fa fa-list"></i>
+                    </div>
+                    <h2>{{ total_sell_requests }}</h2>
+                    <p>Total Sell Requests</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">
+                        <i class="fa fa-check-circle"></i>
+                    </div>
+                    <h2>{{ approved_cars }}</h2>
+                    <p>Approved Cars</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">
+                        <i class="fa fa-clock-o"></i>
+                    </div>
+                    <h2>{{ pending_requests }}</h2>
+                    <p>Pending Requests</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">
+                        <i class="fa fa-times-circle"></i>
+                    </div>
+                    <h2>{{ rejected_requests }}</h2>
+                    <p>Rejected Requests</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">
+                        <i class="fa fa-phone"></i>
+                    </div>
+                    <h2>{{ contacted_requests }}</h2>
+                    <p>Contacted Requests</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">
+                        <i class="fa fa-flag-checkered"></i>
+                    </div>
+                    <h2>{{ completed_requests }}</h2>
+                    <p>Completed Requests</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">
+                        <i class="fa fa-envelope"></i>
+                    </div>
+                    <h2>{{ total_inquiries }}</h2>
+                    <p>Total Inquiries</p>
+                </div>
+            </div>
+
+            <div class="report-grid">
+                <div class="section">
+                    <h3>Status Summary</h3>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Status</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            {% if status_summary %}
+                            {% for row in status_summary %}
+                            <tr>
+                                <td>
+                                    <span class="status-pill {{ row.status }}">
+                                        {{ row.status }}
+                                    </span>
+                                </td>
+                                <td>{{ row.total }}</td>
+                            </tr>
+                            {% endfor %}
+                            {% else %}
+                            <tr>
+                                <td colspan="2" class="empty">No status records found.</td>
+                            </tr>
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="section">
+                    <h3>Top Vehicle Brands</h3>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Brand</th>
+                                <th>Total Requests</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            {% if brand_summary %}
+                            {% for row in brand_summary %}
+                            <tr>
+                                <td>{{ row.vehicle_brand }}</td>
+                                <td>{{ row.total }}</td>
+                            </tr>
+                            {% endfor %}
+                            {% else %}
+                            <tr>
+                                <td colspan="2" class="empty">No brand records found.</td>
+                            </tr>
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="section">
+                    <h3>Daily Sell Request Summary</h3>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Total Requests</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            {% if daily_summary %}
+                            {% for row in daily_summary %}
+                            <tr>
+                                <td>{{ row.request_date }}</td>
+                                <td>{{ row.total }}</td>
+                            </tr>
+                            {% endfor %}
+                            {% else %}
+                            <tr>
+                                <td colspan="2" class="empty">No daily records found.</td>
+                            </tr>
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,1270 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Sell Your Car - LNS CARz Sri Lanka">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sell Your Car | LNS CARz</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/font-awesome.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/elegant-icons.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/nice-select.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/magnific-popup.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/jquery-ui.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/owl.carousel.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/slicknav.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <style>
+        .form-section {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.09);
+            padding: 44px 40px;
+            border-top: 4px solid #e53935;
+        }
+
+        .form-section h3 {
+            font-size: 20px;
+            font-weight: 900;
+            color: #111;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .form-section h3 i {
+            color: #e53935;
+            font-size: 18px;
+        }
+
+        .form-divider {
+            border: none;
+            border-top: 1px solid #f0f0f0;
+            margin: 28px 0;
+        }
+
+        .form-label {
+            font-size: 13px;
+            font-weight: 700;
+            color: #444;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+            display: block;
+        }
+
+        .form-label span {
+            color: #e53935;
+        }
+
+        .form-control-lns {
+            width: 100%;
+            padding: 13px 16px;
+            border: 1.5px solid #e8e8e8;
+            border-radius: 6px;
+            font-size: 14px;
+            color: #333;
+            background: #fafafa;
+            transition: all 0.25s ease;
+            font-family: 'Lato', sans-serif;
+            margin-bottom: 20px;
+        }
+
+        .form-control-lns:focus {
+            border-color: #e53935;
+            background: #fff;
+            box-shadow: 0 0 0 3px rgba(229, 57, 53, 0.08);
+            outline: none;
+        }
+
+        .form-control-lns::placeholder {
+            color: #aaa;
+        }
+
+        select.form-control-lns {
+            cursor: pointer;
+            appearance: none;
+            -webkit-appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23e53935' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 14px center;
+            padding-right: 36px;
+        }
+
+        textarea.form-control-lns {
+            resize: vertical;
+            min-height: 110px;
+        }
+
+        .lkr-slider-wrap {
+            margin-bottom: 20px;
+        }
+
+        .lkr-slider-label {
+            font-size: 13px;
+            font-weight: 700;
+            color: #444;
+            letter-spacing: 0.5px;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .lkr-display {
+            background: #fff5f5;
+            border: 1.5px solid rgba(229, 57, 53, 0.25);
+            border-radius: 6px;
+            padding: 11px 16px;
+            font-size: 15px;
+            font-weight: 800;
+            color: #e53935;
+            letter-spacing: 0.5px;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .lkr-slider-range {
+            margin: 8px 4px 4px;
+        }
+
+        .lkr-range-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 11px;
+            color: #aaa;
+            font-weight: 600;
+            margin-top: 4px;
+        }
+
+        .step-indicator {
+            display: flex;
+            gap: 0;
+            margin-bottom: 36px;
+        }
+
+        .step-item {
+            flex: 1;
+            text-align: center;
+            position: relative;
+        }
+
+        .step-item::after {
+            content: '';
+            position: absolute;
+            top: 18px;
+            left: 50%;
+            width: 100%;
+            height: 2px;
+            background: #e8e8e8;
+            z-index: 0;
+        }
+
+        .step-item:last-child::after {
+            display: none;
+        }
+
+        .step-circle {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: #e8e8e8;
+            color: #aaa;
+            font-size: 13px;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 8px;
+            position: relative;
+            z-index: 1;
+            transition: all 0.3s;
+        }
+
+        .step-item.active .step-circle {
+            background: #e53935;
+            color: #fff;
+            box-shadow: 0 4px 14px rgba(229, 57, 53, 0.35);
+        }
+
+        .step-item p {
+            font-size: 11px;
+            font-weight: 700;
+            color: #aaa;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .step-item.active p {
+            color: #e53935;
+        }
+
+        .info-sidebar {
+            background: #f9f9f9;
+            border-radius: 12px;
+            padding: 32px 28px;
+            border-left: 4px solid #e53935;
+            height: fit-content;
+        }
+
+        .info-sidebar h5 {
+            font-size: 16px;
+            font-weight: 900;
+            color: #111;
+            margin-bottom: 18px;
+        }
+
+        .info-step {
+            display: flex;
+            gap: 14px;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .info-step-num {
+            min-width: 32px;
+            height: 32px;
+            background: #e53935;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            font-weight: 900;
+            color: #fff;
+        }
+
+        .info-step-text h6 {
+            font-size: 13px;
+            font-weight: 800;
+            color: #222;
+            margin: 0 0 4px;
+        }
+
+        .info-step-text p {
+            font-size: 12px;
+            color: #888;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        .contact-bar {
+            background: #111;
+            border-radius: 8px;
+            padding: 16px 20px;
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .contact-bar i {
+            color: #e53935;
+            font-size: 18px;
+        }
+
+        .contact-bar span {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .contact-bar strong {
+            color: #fff;
+            font-size: 14px;
+            display: block;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 16px;
+            background: #e53935;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-size: 15px;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .submit-btn:hover {
+            background: #b71c1c;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(229, 57, 53, 0.4);
+        }
+
+        .char-count {
+            font-size: 11px;
+            color: #aaa;
+            text-align: right;
+            margin-top: -16px;
+            margin-bottom: 16px;
+        }
+
+        .alert-error {
+            background: #fee2e2;
+            border: 1px solid #fecaca;
+            color: #991b1b;
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .alert-success {
+            background: #dcfce7;
+            border: 1px solid #bbf7d0;
+            color: #166534;
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .lns-header {
+            background: #111111;
+            position: relative;
+            z-index: 99;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.18);
+        }
+
+        .lns-header-top {
+            background: #0b0b0b;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 9px 0;
+        }
+
+        .lns-top-info {
+            display: flex;
+            align-items: center;
+            gap: 22px;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            color: rgba(255, 255, 255, 0.72);
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .lns-top-info i {
+            color: #e53935;
+            margin-right: 7px;
+        }
+
+        .lns-top-right {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 18px;
+        }
+
+        .lns-phone {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 13px;
+            font-weight: 800;
+            white-space: nowrap;
+        }
+
+        .lns-phone i {
+            color: #e53935;
+            margin-right: 7px;
+        }
+
+        .lns-social {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .lns-social a {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.08);
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            transition: all 0.25s ease;
+            text-decoration: none;
+        }
+
+        .lns-social a:hover {
+            background: #e53935;
+            color: #ffffff;
+            transform: translateY(-2px);
+        }
+
+        .lns-main-nav {
+            padding: 18px 0;
+        }
+
+        .lns-nav-wrap {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 28px;
+        }
+
+        .lns-logo {
+            color: #ffffff;
+            font-size: 28px;
+            font-weight: 900;
+            letter-spacing: 1px;
+            text-decoration: none;
+            white-space: nowrap;
+            line-height: 1;
+        }
+
+        .lns-logo:hover {
+            color: #ffffff;
+            text-decoration: none;
+        }
+
+        .lns-logo span {
+            color: #e53935;
+        }
+
+        .lns-menu {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 4px;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            flex: 1;
+        }
+
+        .lns-menu>li {
+            position: relative;
+        }
+
+        .lns-menu>li>a {
+            display: block;
+            color: rgba(255, 255, 255, 0.86);
+            font-size: 14px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.7px;
+            padding: 12px 13px;
+            border-radius: 10px;
+            text-decoration: none;
+            transition: all 0.25s ease;
+        }
+
+        .lns-menu>li:hover>a,
+        .lns-menu>li.active>a {
+            background: rgba(229, 57, 53, 0.14);
+            color: #ffffff;
+        }
+
+        .lns-menu>li.active>a {
+            color: #e53935;
+        }
+
+        .lns-dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            min-width: 210px;
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 10px;
+            list-style: none;
+            margin: 10px 0 0;
+            box-shadow: 0 14px 40px rgba(0, 0, 0, 0.18);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.25s ease;
+            z-index: 100;
+        }
+
+        .lns-menu>li:hover .lns-dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .lns-dropdown li a {
+            display: block;
+            padding: 10px 12px;
+            color: #222222;
+            font-size: 13px;
+            font-weight: 800;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .lns-dropdown li a:hover {
+            background: #fff5f5;
+            color: #e53935;
+        }
+
+        .lns-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .lns-search-btn {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.09);
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.25s ease;
+        }
+
+        .lns-search-btn:hover {
+            background: #e53935;
+            color: #ffffff;
+            text-decoration: none;
+        }
+
+        .lns-sell-btn {
+            height: 42px;
+            padding: 0 18px;
+            background: #e53935;
+            color: #ffffff;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.7px;
+            text-decoration: none;
+            box-shadow: 0 8px 20px rgba(229, 57, 53, 0.3);
+            transition: all 0.25s ease;
+            white-space: nowrap;
+        }
+
+        .lns-sell-btn:hover {
+            background: #b71c1c;
+            color: #ffffff;
+            text-decoration: none;
+            transform: translateY(-2px);
+        }
+
+        .lns-mobile-open {
+            display: none;
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
+            background: #e53935;
+            color: #ffffff;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        @media (max-width: 991px) {
+            .lns-header-top {
+                display: none;
+            }
+
+            .lns-menu,
+            .lns-actions {
+                display: none;
+            }
+
+            .lns-mobile-open {
+                display: flex;
+            }
+
+            .lns-main-nav {
+                padding: 16px 0;
+            }
+
+            .lns-logo {
+                font-size: 24px;
+            }
+        }
+
+        @media(max-width:768px) {
+            .form-section {
+                padding: 28px 20px;
+            }
+
+            .step-item p {
+                font-size: 9px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="preloder">
+        <div class="loader"></div>
+    </div>
+
+    <div class="offcanvas-menu-overlay"></div>
+    <div class="offcanvas-menu-wrapper">
+        <div class="offcanvas__widget"><a href="{{ url_for('sell') }}" class="primary-btn">Sell Your Car</a></div>
+        <div class="offcanvas__logo"><a href="{{ url_for('home') }}"><strong
+                    style="font-size:22px;color:#fff;font-weight:900;letter-spacing:1px;">LNS <span
+                        style="color:#e53935;">CARz</span></strong></a></div>
+        <div id="mobile-menu-wrap"></div>
+        <ul class="offcanvas__widget__add">
+            <li><i class="fa fa-clock-o"></i> Mon–Sat: 08:00 am – 06:00 pm</li>
+            <li><i class="fa fa-envelope-o"></i> lnscarz7@gmail.com</li>
+        </ul>
+        <div class="offcanvas__phone__num"><i class="fa fa-phone"></i><span>075 428 9843</span></div>
+        <div class="offcanvas__social">
+            <a href="https://www.facebook.com/share/18AeLHQNXq/?mibextid=wwXIfr" target="_blank" title="Facebook"><i
+                    class="fa fa-facebook"></i></a>
+            <a href="https://www.instagram.com/lnscarz._?igsh=MTdoYXp4ZmlmMXpwYQ==" target="_blank" title="Instagram"><i
+                    class="fa fa-instagram"></i></a>
+            <a href="https://www.tiktok.com/@lnscarz?_r=1&_t=ZS-9574dbZN3p3" target="_blank" title="TikTok"><i
+                    class="fa fa-music"></i></a>
+            <a href="https://wa.me/94754289843" target="_blank" title="WhatsApp"><i class="fa fa-whatsapp"></i></a>
+        </div>
+    </div>
+
+    <header class="lns-header">
+        <div class="lns-header-top">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-7">
+                        <ul class="lns-top-info">
+                            <li>
+                                <i class="fa fa-clock-o"></i>
+                                Mon–Sat: 08:00 am – 06:00 pm
+                            </li>
+                            <li>
+                                <i class="fa fa-envelope-o"></i>
+                                lnscarz7@gmail.com
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-5">
+                        <div class="lns-top-right">
+                            <div class="lns-phone">
+                                <i class="fa fa-phone"></i>
+                                075 428 9843 / 077 883 5662
+                            </div>
+
+                            <div class="lns-social">
+                                <a href="https://www.facebook.com/share/18AeLHQNXq/?mibextid=wwXIfr" target="_blank"
+                                    title="Facebook">
+                                    <i class="fa fa-facebook"></i>
+                                </a>
+                                <a href="https://www.instagram.com/lnscarz._?igsh=MTdoYXp4ZmlmMXpwYQ==" target="_blank"
+                                    title="Instagram">
+                                    <i class="fa fa-instagram"></i>
+                                </a>
+                                <a href="https://www.tiktok.com/@lnscarz?_r=1&_t=ZS-9574dbZN3p3" target="_blank"
+                                    title="TikTok">
+                                    <i class="fa fa-music"></i>
+                                </a>
+                                <a href="https://wa.me/94754289843" target="_blank" title="WhatsApp">
+                                    <i class="fa fa-whatsapp"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="lns-main-nav">
+            <div class="container">
+                <div class="lns-nav-wrap">
+                    <a href="{{ url_for('home') }}" class="lns-logo">
+                        LNS <span>CARz</span>
+                    </a>
+
+                    <ul class="lns-menu">
+                        <li class="{% if request.endpoint == 'home' %}active{% endif %}">
+                            <a href="{{ url_for('home') }}">Home</a>
+                        </li>
+
+                        <li class="{% if request.endpoint == 'cars' %}active{% endif %}">
+                            <a href="{{ url_for('cars') }}">Cars</a>
+                        </li>
+
+                        <li class="{% if request.endpoint == 'sell' %}active{% endif %}">
+                            <a href="{{ url_for('sell') }}">Sell Your Car</a>
+                        </li>
+
+                        <li>
+                            <a href="#">Services <i class="fa fa-angle-down" style="margin-left:5px;"></i></a>
+                            <ul class="lns-dropdown">
+                                <li>
+                                    <a href="{{ url_for('brokering') }}">Brokering Service</a>
+                                </li>
+                                <li>
+                                    <a href="{{ url_for('booking') }}">Book a Valuation</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li>
+                            <a href="#">Pages <i class="fa fa-angle-down" style="margin-left:5px;"></i></a>
+                            <ul class="lns-dropdown">
+                                <li>
+                                    <a href="{{ url_for('blog') }}">Blog</a>
+                                </li>
+                                <li>
+                                    <a href="{{ url_for('blog_details') }}">Blog Details</a>
+                                </li>
+                                <li>
+                                    <a href="{{ url_for('car_details') }}">Car Details</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="{% if request.endpoint == 'about' %}active{% endif %}">
+                            <a href="{{ url_for('about') }}">About</a>
+                        </li>
+
+                        <li class="{% if request.endpoint == 'contact' %}active{% endif %}">
+                            <a href="{{ url_for('contact') }}">Contact</a>
+                        </li>
+                    </ul>
+
+                    <div class="lns-actions">
+                        <a href="#" class="lns-search-btn search-switch">
+                            <i class="fa fa-search"></i>
+                        </a>
+
+                        <a href="{{ url_for('sell') }}" class="lns-sell-btn">
+                            Sell Your Car
+                        </a>
+                    </div>
+
+                    <div class="lns-mobile-open canvas__open">
+                        <span class="fa fa-bars"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="breadcrumb-option set-bg" data-setbg="{{ url_for('static', filename='img/breadcrumb-bg.jpg') }}">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="breadcrumb__text">
+                        <h2>Sell Your Car</h2>
+                        <div class="breadcrumb__links">
+                            <a href="{{ url_for('home') }}"><i class="fa fa-home"></i> Home</a>
+                            <span>Sell Your Car</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="spad" style="background:#f5f5f5;">
+        <div class="container">
+
+            <div class="row" style="margin-bottom:40px;">
+                <div class="col-lg-8 col-md-10 mx-auto text-center">
+                    <div class="section-title" style="text-align:center;">
+                        <span>Get The Best Market Value</span>
+                        <h2>Submit Your Vehicle for Sale</h2>
+                        <p style="margin:0 auto;">Fill in the form below with your vehicle details. Our team will review
+                            your submission and contact you within <strong>24 hours</strong> with a competitive offer.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" style="margin-bottom:36px;">
+                <div class="col-lg-8 col-md-10 mx-auto">
+                    <div class="step-indicator">
+                        <div class="step-item active">
+                            <div class="step-circle"><i class="fa fa-user"></i></div>
+                            <p>Your Details</p>
+                        </div>
+                        <div class="step-item active">
+                            <div class="step-circle"><i class="fa fa-car"></i></div>
+                            <p>Vehicle Info</p>
+                        </div>
+                        <div class="step-item active">
+                            <div class="step-circle"><i class="fa fa-tag"></i></div>
+                            <p>Pricing</p>
+                        </div>
+                        <div class="step-item active">
+                            <div class="step-circle"><i class="fa fa-paper-plane"></i></div>
+                            <p>Submit</p>
+                        </div>
+                    </div>
+                    <p style="font-size:13px;color:#888;text-align:center;margin-bottom:24px;"><i
+                            class="fa fa-info-circle" style="color:#e53935;"></i> This is a single-page form. Fill in
+                        all sections below and click <strong>Submit Vehicle for Sale</strong> at the bottom.</p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-8">
+                    <form id="sellForm" action="{{ url_for('sell_request') }}" method="POST"
+                        enctype="multipart/form-data" novalidate>
+
+                        {% with messages = get_flashed_messages(with_categories=true) %}
+                        {% if messages %}
+                        {% for category, message in messages %}
+                        <div class="alert-{{ category }}">{{ message }}</div>
+                        {% endfor %}
+                        {% endif %}
+                        {% endwith %}
+
+                        <div class="form-section" style="margin-bottom:28px;">
+                            <h3><i class="fa fa-user-circle"></i> Your Personal Details</h3>
+                            <p style="font-size:13px;color:#888;margin-bottom:24px;">We'll use this to contact you with
+                                an offer.</p>
+                            <hr class="form-divider">
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label class="form-label">Full Name <span>*</span></label>
+                                    <input type="text" name="full_name" class="form-control-lns"
+                                        placeholder="e.g. Nuwan Perera">
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label">NIC / Passport Number <span>*</span></label>
+                                    <input type="text" name="nic_passport" class="form-control-lns"
+                                        placeholder="e.g. 199012345678">
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label">Mobile Number <span>*</span></label>
+                                    <input type="tel" name="mobile_number" class="form-control-lns"
+                                        placeholder="e.g. 075 428 9843">
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label">WhatsApp Number</label>
+                                    <input type="tel" name="whatsapp_number" class="form-control-lns"
+                                        placeholder="Same as mobile? Leave blank if so">
+                                </div>
+
+                                <div class="col-md-12">
+                                    <label class="form-label">Email Address</label>
+                                    <input type="email" name="email" class="form-control-lns"
+                                        placeholder="e.g. yourname@email.com">
+                                </div>
+
+                                <div class="col-md-12">
+                                    <label class="form-label">Your Location / District <span>*</span></label>
+                                    <select name="district" class="form-control-lns">
+                                        <option value="">Select your district</option>
+                                        <option>Colombo</option>
+                                        <option>Gampaha</option>
+                                        <option>Kalutara</option>
+                                        <option>Kandy</option>
+                                        <option>Matale</option>
+                                        <option>Nuwara Eliya</option>
+                                        <option>Galle</option>
+                                        <option>Matara</option>
+                                        <option>Hambantota</option>
+                                        <option>Jaffna</option>
+                                        <option>Kilinochchi</option>
+                                        <option>Mannar</option>
+                                        <option>Vavuniya</option>
+                                        <option>Mullaitivu</option>
+                                        <option>Batticaloa</option>
+                                        <option>Ampara</option>
+                                        <option>Trincomalee</option>
+                                        <option>Kurunegala</option>
+                                        <option>Puttalam</option>
+                                        <option>Anuradhapura</option>
+                                        <option>Polonnaruwa</option>
+                                        <option>Badulla</option>
+                                        <option>Monaragala</option>
+                                        <option>Ratnapura</option>
+                                        <option>Kegalle</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-section" style="margin-bottom:28px;">
+                            <h3><i class="fa fa-car"></i> Vehicle Information</h3>
+                            <p style="font-size:13px;color:#888;margin-bottom:24px;">Accurate details help us give you
+                                the best offer quickly.</p>
+                            <hr class="form-divider">
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label class="form-label">Vehicle Brand / Make <span>*</span></label>
+                                    <select name="vehicle_brand" class="form-control-lns">
+                                        <option value="">Select brand</option>
+                                        <option>Toyota</option>
+                                        <option>Honda</option>
+                                        <option>Nissan</option>
+                                        <option>Suzuki</option>
+                                        <option>Mitsubishi</option>
+                                        <option>Mazda</option>
+                                        <option>Subaru</option>
+                                        <option>BMW</option>
+                                        <option>Mercedes-Benz</option>
+                                        <option>Audi</option>
+                                        <option>Volkswagen</option>
+                                        <option>Hyundai</option>
+                                        <option>Kia</option>
+                                        <option>Ford</option>
+                                        <option>Jeep</option>
+                                        <option>Land Rover</option>
+                                        <option>Volvo</option>
+                                        <option>Other</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label">Model <span>*</span></label>
+                                    <input type="text" name="vehicle_model" class="form-control-lns"
+                                        placeholder="e.g. Corolla, Vezel, Aqua">
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label">Year of Manufacture <span>*</span></label>
+                                    <select name="manufacture_year" class="form-control-lns">
+                                        <option value="">Select year</option>
+                                        <option>2024</option>
+                                        <option>2023</option>
+                                        <option>2022</option>
+                                        <option>2021</option>
+                                        <option>2020</option>
+                                        <option>2019</option>
+                                        <option>2018</option>
+                                        <option>2017</option>
+                                        <option>2016</option>
+                                        <option>2015</option>
+                                        <option>2014</option>
+                                        <option>2013</option>
+                                        <option>2012</option>
+                                        <option>2011</option>
+                                        <option>2010</option>
+                                        <option>Before 2010</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label">Mileage (km) <span>*</span></label>
+                                    <input type="text" name="mileage" class="form-control-lns"
+                                        placeholder="e.g. 45,000 km">
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label">Fuel Type <span>*</span></label>
+                                    <select name="fuel_type" class="form-control-lns">
+                                        <option value="">Select fuel type</option>
+                                        <option>Petrol</option>
+                                        <option>Diesel</option>
+                                        <option>Hybrid (Petrol)</option>
+                                        <option>Hybrid (Diesel)</option>
+                                        <option>Full Electric</option>
+                                        <option>LPG</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label">Transmission <span>*</span></label>
+                                    <select name="transmission" class="form-control-lns">
+                                        <option value="">Select transmission</option>
+                                        <option>Automatic</option>
+                                        <option>Manual</option>
+                                        <option>CVT</option>
+                                        <option>Semi-Automatic</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label">Body Type</label>
+                                    <select name="body_type" class="form-control-lns">
+                                        <option value="">Select body type</option>
+                                        <option>Sedan</option>
+                                        <option>Hatchback</option>
+                                        <option>SUV</option>
+                                        <option>Crossover</option>
+                                        <option>Van</option>
+                                        <option>Pickup Truck</option>
+                                        <option>Coupe</option>
+                                        <option>Convertible</option>
+                                        <option>Wagon</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label">Vehicle Colour</label>
+                                    <input type="text" name="vehicle_colour" class="form-control-lns"
+                                        placeholder="e.g. Pearl White, Silver">
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label">Overall Condition <span>*</span></label>
+                                    <select name="vehicle_condition" class="form-control-lns">
+                                        <option value="">Select condition</option>
+                                        <option>Excellent — Like New</option>
+                                        <option>Good — Minor Wear</option>
+                                        <option>Fair — Needs Minor Repairs</option>
+                                        <option>Poor — Needs Major Repairs</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label">Number of Previous Owners</label>
+                                    <select name="previous_owners" class="form-control-lns">
+                                        <option value="">Select</option>
+                                        <option>1st Owner</option>
+                                        <option>2nd Owner</option>
+                                        <option>3rd Owner</option>
+                                        <option>4+ Owners</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <label class="form-label">Vehicle Registration Number</label>
+                                    <input type="text" name="registration_number" class="form-control-lns"
+                                        placeholder="e.g. CAB-1234 or WP-XX-0000">
+                                </div>
+
+                                <div class="col-md-12">
+                                    <label class="form-label">Vehicle Image</label>
+                                    <input type="file" name="vehicle_image" class="form-control-lns" accept="image/*">
+                                    <p style="font-size:12px;color:#999;margin-top:-12px;margin-bottom:18px;">
+                                        Upload a clear front or side image of your vehicle. Accepted formats: JPG, PNG,
+                                        WEBP.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-section" style="margin-bottom:28px;">
+                            <h3><i class="fa fa-tag"></i> Pricing &amp; Additional Info</h3>
+                            <hr class="form-divider">
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="lkr-slider-wrap">
+                                        <label class="lkr-slider-label">Your Expected Selling Price (LKR) <span
+                                                style="color:#e53935;">*</span></label>
+                                        <span class="lkr-display" id="sell-price-display">LKR 3.0M – LKR 8.0M</span>
+                                        <input type="hidden" name="expected_price_min" id="expected_price_min"
+                                            value="3000000">
+                                        <input type="hidden" name="expected_price_max" id="expected_price_max"
+                                            value="8000000">
+                                        <div class="sell-price-range lkr-slider-range"></div>
+                                        <div class="lkr-range-labels"><span>LKR 500K</span><span>LKR 50M</span></div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label">Is the vehicle insured?</label>
+                                    <select name="insurance_status" class="form-control-lns">
+                                        <option value="">Select</option>
+                                        <option>Yes — Fully Comprehensive</option>
+                                        <option>Yes — Third Party</option>
+                                        <option>No Insurance</option>
+                                        <option>Expired</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label">Revenue Licence Valid Until</label>
+                                    <input type="month" name="revenue_license_valid_until" class="form-control-lns">
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label">Does it have any faults or issues?</label>
+                                    <select name="fault_status" class="form-control-lns">
+                                        <option value="">Select</option>
+                                        <option>No — Running perfectly</option>
+                                        <option>Minor cosmetic issues only</option>
+                                        <option>Some mechanical issues</option>
+                                        <option>Major issues / Not running</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label">Preferred Contact Method</label>
+                                    <select name="preferred_contact_method" class="form-control-lns">
+                                        <option>Phone Call</option>
+                                        <option>WhatsApp</option>
+                                        <option>Email</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <label class="form-label">Additional Details / Notes</label>
+                                    <textarea name="notes" class="form-control-lns" id="sellNotes"
+                                        placeholder="Describe any modifications, recent repairs, accessories included, reason for selling, or anything else that would help us assess your vehicle..."
+                                        rows="5" maxlength="500"
+                                        oninput="document.getElementById('sellCount').textContent=this.value.length"></textarea>
+                                    <div class="char-count"><span id="sellCount">0</span>/500 characters</div>
+                                </div>
+                            </div>
+
+                            <button type="button" class="submit-btn" id="sellSubmitBtn">
+                                <i class="fa fa-paper-plane"></i> Submit Vehicle for Sale
+                            </button>
+
+                            <p style="font-size:12px;color:#aaa;margin-top:14px;text-align:center;"><i
+                                    class="fa fa-lock"></i> Your information is confidential and will only be used to
+                                process your vehicle submission.</p>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="info-sidebar">
+                        <h5><i class="fa fa-info-circle" style="color:#e53935;margin-right:8px;"></i> How It Works</h5>
+                        <div class="info-step">
+                            <div class="info-step-num">1</div>
+                            <div class="info-step-text">
+                                <h6>Submit Your Details</h6>
+                                <p>Fill in your vehicle information accurately. The more detail you provide, the better
+                                    the offer we can give you.</p>
+                            </div>
+                        </div>
+                        <div class="info-step">
+                            <div class="info-step-num">2</div>
+                            <div class="info-step-text">
+                                <h6>We Review & Contact You</h6>
+                                <p>Our team reviews your submission and reaches out within 24 hours with an initial
+                                    offer.</p>
+                            </div>
+                        </div>
+                        <div class="info-step">
+                            <div class="info-step-num">3</div>
+                            <div class="info-step-text">
+                                <h6>Free Inspection</h6>
+                                <p>We arrange a convenient inspection at your location or our Pelawatta showroom —
+                                    completely free.</p>
+                            </div>
+                        </div>
+                        <div class="info-step">
+                            <div class="info-step-num">4</div>
+                            <div class="info-step-text">
+                                <h6>Get Paid Quickly</h6>
+                                <p>Once agreed, we handle all paperwork and ensure a fast, secure payment transfer in
+                                    LKR.</p>
+                            </div>
+                        </div>
+                        <hr style="border-color:#e8e8e8;margin:20px 0;">
+                        <h5 style="margin-bottom:14px;"><i class="fa fa-star"
+                                style="color:#e53935;margin-right:8px;"></i> Why Sell With Us?</h5>
+                        <p style="font-size:13px;color:#666;line-height:1.8;"><i class="fa fa-check"
+                                style="color:#e53935;margin-right:6px;"></i> Best market price in LKR<br><i
+                                class="fa fa-check" style="color:#e53935;margin-right:6px;"></i> Free vehicle
+                            inspection<br><i class="fa fa-check" style="color:#e53935;margin-right:6px;"></i> Fast,
+                            hassle-free process<br><i class="fa fa-check" style="color:#e53935;margin-right:6px;"></i>
+                            Safe, secure payment<br><i class="fa fa-check" style="color:#e53935;margin-right:6px;"></i>
+                            All documentation handled</p>
+                        <div class="contact-bar"><i class="fa fa-whatsapp"></i>
+                            <div><span>Prefer to WhatsApp?</span><strong><a href="https://wa.me/94754289843"
+                                        target="_blank" style="color:#25d366;">075 428 9843</a></strong></div>
+                        </div>
+                        <div class="contact-bar" style="margin-top:10px;"><i class="fa fa-phone"></i>
+                            <div><span>Call us directly</span><strong style="color:#fff;">075 428 9843 / 077 883
+                                    5662</strong></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer set-bg" data-setbg="{{ url_for('static', filename='img/footer-bg.jpg') }}">
+        <div class="container">
+            <div class="footer__contact">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="footer__contact__title">
+                            <h2>Contact LNS CARz Today!</h2>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="footer__contact__option">
+                            <div class="option__item"><i class="fa fa-phone"></i> 075 428 9843 / 077 883 5662</div>
+                            <div class="option__item email"><i class="fa fa-envelope-o"></i> lnscarz7@gmail.com</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer__copyright__text">
+                <p>Copyright &copy;
+                    <script>document.write(new Date().getFullYear());</script> LNS CARz. All rights reserved. | Rev Up
+                    Your Ride! | NO:272/D Robert Gunawardana Mw, Pelawatta, Sri Lanka
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <div class="search-model">
+        <div class="h-100 d-flex align-items-center justify-content-center">
+            <div class="search-close-switch">+</div>
+            <form class="search-model-form"><input type="text" id="search-input" placeholder="Search cars..."></form>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/jquery-3.3.1.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.nice-select.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery-ui.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.magnific-popup.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.slicknav.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/owl.carousel.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+    <script>
+        $(function () {
+            function formatLKR(v) {
+                return v >= 1000000
+                    ? 'LKR ' + (v / 1000000).toFixed(1) + 'M'
+                    : 'LKR ' + (v / 1000).toFixed(0) + 'K';
+            }
+
+            if ($.fn.slider) {
+                $(".sell-price-range").slider({
+                    range: true,
+                    min: 500000,
+                    max: 50000000,
+                    step: 500000,
+                    values: [3000000, 8000000],
+                    slide: function (e, ui) {
+                        $('#sell-price-display').text(formatLKR(ui.values[0]) + ' – ' + formatLKR(ui.values[1]));
+                        $('#expected_price_min').val(ui.values[0]);
+                        $('#expected_price_max').val(ui.values[1]);
+                    }
+                });
+            }
+
+            $('#sellSubmitBtn').on('click', function () {
+                const form = document.getElementById('sellForm');
+
+                $('#sellSubmitBtn')
+                    .html('<i class="fa fa-spinner fa-spin"></i> Submitting...')
+                    .css('background', '#999');
+
+                HTMLFormElement.prototype.submit.call(form);
+            });
+        });
+    </script>
+</body>
+
+</html>

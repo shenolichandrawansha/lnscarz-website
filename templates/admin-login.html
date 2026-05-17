@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="LNS CARz Admin Login">
+    <meta name="keywords" content="LNS CARz, Admin Login, Used Cars Sri Lanka">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LNS CARz | Admin Login</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/font-awesome.min.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/elegant-icons.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" type="text/css">
+
+    <style>
+        body {
+            font-family: 'Lato', sans-serif;
+            background: #0f172a;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .admin-login-wrapper {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 30px 15px;
+            background:
+                linear-gradient(rgba(15, 23, 42, 0.82), rgba(15, 23, 42, 0.9)),
+                url("{{ url_for('static', filename='img/hero-bg.jpg') }}");
+            background-size: cover;
+            background-position: center;
+        }
+
+        .admin-login-card {
+            width: 100%;
+            max-width: 430px;
+            background: #ffffff;
+            border-radius: 18px;
+            padding: 35px 32px;
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.35);
+        }
+
+        .admin-logo {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .admin-logo a {
+            font-size: 32px;
+            font-weight: 900;
+            color: #111827;
+            text-decoration: none;
+            letter-spacing: 1px;
+        }
+
+        .admin-logo span {
+            color: #e53935;
+        }
+
+        .admin-login-card h3 {
+            text-align: center;
+            font-weight: 900;
+            color: #111827;
+            margin-bottom: 8px;
+        }
+
+        .admin-login-card p {
+            text-align: center;
+            color: #6b7280;
+            margin-bottom: 28px;
+            font-size: 14px;
+        }
+
+        .form-group label {
+            font-weight: 700;
+            color: #111827;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .form-control {
+            height: 48px;
+            border-radius: 10px;
+            border: 1px solid #d1d5db;
+            padding: 10px 14px;
+            font-size: 14px;
+        }
+
+        .form-control:focus {
+            border-color: #e53935;
+            box-shadow: 0 0 0 3px rgba(229, 57, 53, 0.12);
+        }
+
+        .login-btn {
+            width: 100%;
+            height: 50px;
+            border: none;
+            border-radius: 10px;
+            background: #e53935;
+            color: #ffffff;
+            font-size: 15px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .login-btn:hover {
+            background: #c62828;
+        }
+
+        .back-home {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #111827;
+            font-weight: 700;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .back-home:hover {
+            color: #e53935;
+            text-decoration: none;
+        }
+
+        .alert {
+            border-radius: 10px;
+            font-size: 14px;
+            padding: 12px 14px;
+            margin-bottom: 18px;
+        }
+
+        .alert-error {
+            background: #fee2e2;
+            color: #991b1b;
+            border: 1px solid #fecaca;
+        }
+
+        .alert-success {
+            background: #dcfce7;
+            color: #166534;
+            border: 1px solid #bbf7d0;
+        }
+
+        .login-help {
+            margin-top: 18px;
+            background: #f9fafb;
+            border: 1px dashed #d1d5db;
+            border-radius: 10px;
+            padding: 12px;
+            font-size: 13px;
+            color: #4b5563;
+        }
+
+        .login-help strong {
+            color: #111827;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="admin-login-wrapper">
+        <div class="admin-login-card">
+
+            <div class="admin-logo">
+                <a href="{{ url_for('home') }}">LNS <span>CARz</span></a>
+            </div>
+
+            <h3>Admin Login</h3>
+            <p>Login to manage vehicle listings and customer inquiries.</p>
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            {% for category, message in messages %}
+            <div class="alert alert-{{ category }}">
+                {{ message }}
+            </div>
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
+
+            <form action="{{ url_for('admin_login') }}" method="POST">
+                <div class="form-group">
+                    <label for="username">
+                        <i class="fa fa-user"></i> Username
+                    </label>
+                    <input type="text" id="username" name="username" class="form-control"
+                        placeholder="Enter admin username" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">
+                        <i class="fa fa-lock"></i> Password
+                    </label>
+                    <input type="password" id="password" name="password" class="form-control"
+                        placeholder="Enter admin password" required>
+                </div>
+
+                <button type="submit" class="login-btn">
+                    Login
+                </button>
+            </form>
+
+            <div class="login-help">
+                <strong>Test Login:</strong><br>
+                Username: admin<br>
+                Password: admin123
+            </div>
+
+            <a href="{{ url_for('home') }}" class="back-home">
+                <i class="fa fa-arrow-left"></i> Back to Website
+            </a>
+
+        </div>
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>404 | LNS CARz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f9;
+            text-align: center;
+            padding: 80px;
+        }
+
+        .box {
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 16px;
+            max-width: 500px;
+            margin: auto;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+
+        h1 {
+            color: #e53935;
+            font-size: 56px;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            color: #111827;
+        }
+
+        p {
+            color: #6b7280;
+            margin-bottom: 28px;
+        }
+
+        a {
+            background: #e53935;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <h1>404</h1>
+        <h2>Page Not Found</h2>
+        <p>The page you are looking for does not exist.</p>
+        <a href="{{ url_for('home') }}">Back to Home</a>
+    </div>
+</body>
+</html>

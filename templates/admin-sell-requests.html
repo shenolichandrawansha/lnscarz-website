@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>LNS CARz | Sell Requests</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/font-awesome.min.css') }}">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Lato', sans-serif;
+            background: #f4f6f9;
+            color: #111827;
+        }
+
+        .admin-layout {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 260px;
+            background: #111827;
+            color: #ffffff;
+            padding: 24px 18px;
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+        }
+
+        .logo {
+            font-size: 26px;
+            font-weight: 900;
+            margin-bottom: 34px;
+            letter-spacing: 1px;
+        }
+
+        .logo span {
+            color: #e53935;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #d1d5db;
+            text-decoration: none;
+            padding: 13px 14px;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            transition: 0.2s;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            background: #e53935;
+            color: #ffffff;
+        }
+
+        .logout {
+            margin-top: 30px;
+            background: #374151;
+        }
+
+        .main {
+            margin-left: 260px;
+            width: calc(100% - 260px);
+            padding: 28px;
+        }
+
+        .topbar {
+            background: #ffffff;
+            padding: 20px 24px;
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+            margin-bottom: 22px;
+        }
+
+        .topbar h1 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: 900;
+        }
+
+        .topbar p {
+            margin: 4px 0 0;
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        .filter-card {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 22px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+            margin-bottom: 22px;
+            border-left: 5px solid #e53935;
+        }
+
+        .filter-form {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr auto auto;
+            gap: 12px;
+            align-items: end;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 12px;
+            font-weight: 900;
+            color: #374151;
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+            margin-bottom: 7px;
+        }
+
+        .form-control {
+            width: 100%;
+            height: 44px;
+            border: 1px solid #d1d5db;
+            border-radius: 10px;
+            padding: 0 13px;
+            font-size: 13px;
+            font-weight: 700;
+            color: #111827;
+            outline: none;
+            background: #ffffff;
+        }
+
+        .form-control:focus {
+            border-color: #e53935;
+            box-shadow: 0 0 0 3px rgba(229, 57, 53, 0.08);
+        }
+
+        .btn-search,
+        .btn-reset {
+            height: 44px;
+            border-radius: 10px;
+            padding: 0 16px;
+            border: none;
+            font-size: 13px;
+            font-weight: 900;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            white-space: nowrap;
+        }
+
+        .btn-search {
+            background: #e53935;
+            color: #ffffff;
+        }
+
+        .btn-reset {
+            background: #111827;
+            color: #ffffff;
+        }
+
+        .btn-search:hover {
+            background: #b71c1c;
+        }
+
+        .btn-reset:hover {
+            background: #374151;
+            color: #ffffff;
+            text-decoration: none;
+        }
+
+        .alert-success {
+            background: #dcfce7;
+            border: 1px solid #bbf7d0;
+            color: #166534;
+            padding: 12px 16px;
+            border-radius: 10px;
+            margin-bottom: 18px;
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .section {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+            overflow-x: auto;
+        }
+
+        .result-count {
+            color: #6b7280;
+            font-size: 13px;
+            font-weight: 800;
+            margin-bottom: 16px;
+        }
+
+        .result-count strong {
+            color: #e53935;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 1250px;
+        }
+
+        th {
+            text-align: left;
+            background: #f9fafb;
+            color: #374151;
+            padding: 13px;
+            font-size: 13px;
+            font-weight: 900;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        td {
+            padding: 13px;
+            border-bottom: 1px solid #e5e7eb;
+            font-size: 13px;
+            color: #374151;
+            vertical-align: top;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 900;
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .status.Approved {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .status.Rejected {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .status.Contacted {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+
+        .status.Completed {
+            background: #ede9fe;
+            color: #5b21b6;
+        }
+
+        .action-row {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        select {
+            padding: 8px 10px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .btn-view {
+            display: inline-block;
+            background: #2563eb;
+            color: #ffffff;
+            padding: 9px 14px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 900;
+            text-decoration: none;
+            margin-bottom: 8px;
+        }
+
+        .btn-view:hover {
+            background: #1d4ed8;
+            color: #ffffff;
+        }
+
+        .btn-update {
+            border: none;
+            background: #111827;
+            color: white;
+            padding: 9px 12px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 900;
+            cursor: pointer;
+        }
+
+        .btn-delete {
+            border: none;
+            background: #e53935;
+            color: white;
+            padding: 9px 12px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 900;
+            cursor: pointer;
+        }
+
+        .empty {
+            text-align: center;
+            color: #9ca3af;
+            padding: 26px;
+            font-size: 14px;
+        }
+
+        .small {
+            color: #6b7280;
+            font-size: 12px;
+            line-height: 1.6;
+        }
+
+        @media(max-width: 1100px) {
+            .filter-form {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media(max-width: 800px) {
+            .sidebar {
+                position: relative;
+                width: 100%;
+                height: auto;
+            }
+
+            .admin-layout {
+                display: block;
+            }
+
+            .main {
+                margin-left: 0;
+                width: 100%;
+            }
+
+            .filter-form {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="admin-layout">
+
+        <aside class="sidebar">
+            <div class="logo">LNS <span>CARz</span></div>
+
+            <a href="{{ url_for('admin_dashboard') }}" class="nav-link">
+                <i class="fa fa-dashboard"></i> Dashboard
+            </a>
+
+            <a href="{{ url_for('admin_sell_requests') }}" class="nav-link active">
+                <i class="fa fa-money"></i> Sell Requests
+            </a>
+
+            <a href="{{ url_for('admin_reports') }}" class="nav-link">
+                <i class="fa fa-bar-chart"></i> Reports
+            </a>
+
+            <a href="{{ url_for('home') }}" class="nav-link">
+                <i class="fa fa-globe"></i> View Website
+            </a>
+
+            <a href="{{ url_for('admin_logout') }}" class="nav-link logout">
+                <i class="fa fa-sign-out"></i> Logout
+            </a>
+        </aside>
+
+        <main class="main">
+
+            <div class="topbar">
+                <h1>Sell Requests</h1>
+                <p>Search, filter, view, update, and manage customer vehicle sale submissions.</p>
+            </div>
+
+            <div class="filter-card">
+                <form action="{{ url_for('admin_sell_requests') }}" method="get" class="filter-form">
+                    <div class="form-group">
+                        <label>Search</label>
+                        <input type="text" name="search" class="form-control"
+                            placeholder="Name, mobile, email, district, brand, model, reg no..."
+                            value="{{ filters.search or '' }}">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Status</label>
+                        <select name="status" class="form-control">
+                            <option value="">All Status</option>
+                            <option value="Pending" {% if filters.status=='Pending' %}selected{% endif %}>Pending
+                            </option>
+                            <option value="Contacted" {% if filters.status=='Contacted' %}selected{% endif %}>Contacted
+                            </option>
+                            <option value="Approved" {% if filters.status=='Approved' %}selected{% endif %}>Approved
+                            </option>
+                            <option value="Rejected" {% if filters.status=='Rejected' %}selected{% endif %}>Rejected
+                            </option>
+                            <option value="Completed" {% if filters.status=='Completed' %}selected{% endif %}>Completed
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Brand</label>
+                        <select name="brand" class="form-control">
+                            <option value="">All Brands</option>
+                            {% for item in brands %}
+                            <option value="{{ item.vehicle_brand }}" {% if filters.brand==item.vehicle_brand
+                                %}selected{% endif %}>
+                                {{ item.vehicle_brand }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn-search">
+                        <i class="fa fa-search"></i>&nbsp; Search
+                    </button>
+
+                    <a href="{{ url_for('admin_sell_requests') }}" class="btn-reset">
+                        <i class="fa fa-refresh"></i>&nbsp; Reset
+                    </a>
+                </form>
+            </div>
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            {% for category, message in messages %}
+            <div class="alert-{{ category }}">
+                {{ message }}
+            </div>
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
+
+            <div class="section">
+                <div class="result-count">
+                    Showing <strong>{{ sell_requests|length }}</strong> sell request{% if sell_requests|length != 1
+                    %}s{% endif %}
+                </div>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Customer</th>
+                            <th>Contact</th>
+                            <th>Vehicle</th>
+                            <th>Price Range</th>
+                            <th>Details</th>
+                            <th>Status</th>
+                            <th>Submitted</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {% if sell_requests %}
+                        {% for req in sell_requests %}
+                        <tr>
+                            <td>#{{ req.id }}</td>
+
+                            <td>
+                                <strong>{{ req.full_name }}</strong><br>
+                                <span class="small">NIC: {{ req.nic_passport }}</span><br>
+                                <span class="small">District: {{ req.district }}</span>
+                            </td>
+
+                            <td>
+                                <strong>{{ req.mobile_number }}</strong><br>
+                                {% if req.whatsapp_number %}
+                                <span class="small">WhatsApp: {{ req.whatsapp_number }}</span><br>
+                                {% endif %}
+                                {% if req.email %}
+                                <span class="small">{{ req.email }}</span>
+                                {% endif %}
+                            </td>
+
+                            <td>
+                                {% if req.vehicle_image %}
+                                <img src="{{ url_for('static', filename=req.vehicle_image) }}"
+                                    alt="{{ req.vehicle_brand }} {{ req.vehicle_model }}"
+                                    style="width:90px;height:60px;object-fit:cover;border-radius:8px;margin-bottom:8px;display:block;">
+                                {% endif %}
+
+                                <strong>{{ req.vehicle_brand }} {{ req.vehicle_model }}</strong><br>
+                                <span class="small">Year: {{ req.manufacture_year }}</span><br>
+                                <span class="small">Mileage: {{ req.mileage }}</span><br>
+                                <span class="small">Fuel: {{ req.fuel_type }}</span><br>
+                                <span class="small">Transmission: {{ req.transmission }}</span>
+                            </td>
+
+                            <td>
+                                <strong>
+                                    LKR {{ "{:,.0f}".format(req.expected_price_min or 0) }}
+                                    -
+                                    {{ "{:,.0f}".format(req.expected_price_max or 0) }}
+                                </strong>
+                            </td>
+
+                            <td>
+                                <span class="small">Condition: {{ req.vehicle_condition }}</span><br>
+                                <span class="small">Colour: {{ req.vehicle_colour or '-' }}</span><br>
+                                <span class="small">Reg No: {{ req.registration_number or '-' }}</span><br>
+                                <span class="small">Insurance: {{ req.insurance_status or '-' }}</span><br>
+                                <span class="small">Faults: {{ req.fault_status or '-' }}</span>
+                            </td>
+
+                            <td>
+                                <span class="status {{ req.status }}">{{ req.status }}</span>
+                            </td>
+
+                            <td>
+                                <span class="small">{{ req.created_at }}</span>
+                            </td>
+
+                            <td>
+                                <a href="{{ url_for('view_sell_request', request_id=req.id) }}" class="btn-view">
+                                    View
+                                </a>
+
+                                <form action="{{ url_for('update_sell_request_status', request_id=req.id) }}"
+                                    method="POST" style="margin-bottom:8px;">
+                                    <div class="action-row">
+                                        <select name="status">
+                                            <option value="Pending" {% if req.status=='Pending' %}selected{% endif %}>
+                                                Pending</option>
+                                            <option value="Contacted" {% if req.status=='Contacted' %}selected{% endif
+                                                %}>Contacted</option>
+                                            <option value="Approved" {% if req.status=='Approved' %}selected{% endif %}>
+                                                Approved</option>
+                                            <option value="Rejected" {% if req.status=='Rejected' %}selected{% endif %}>
+                                                Rejected</option>
+                                            <option value="Completed" {% if req.status=='Completed' %}selected{% endif
+                                                %}>Completed</option>
+                                        </select>
+                                        <button type="submit" class="btn-update">Update</button>
+                                    </div>
+                                </form>
+
+                                <form action="{{ url_for('delete_sell_request', request_id=req.id) }}" method="POST"
+                                    onsubmit="return confirm('Are you sure you want to delete this sell request?');">
+                                    <button type="submit" class="btn-delete">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        {% else %}
+                        <tr>
+                            <td colspan="9" class="empty">No sell requests found for your search/filter.</td>
+                        </tr>
+                        {% endif %}
+                    </tbody>
+                </table>
+            </div>
+
+        </main>
+    </div>
+
+</body>
+
+</html>

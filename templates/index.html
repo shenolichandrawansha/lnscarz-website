@@ -1,0 +1,1885 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="LNS CARz - Buy, Sell & Broker Quality Used Cars in Sri Lanka">
+    <meta name="keywords" content="LNS CARz, used cars, buy car, sell car, car broker, Sri Lanka">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>LNS CARz | Buy, Sell & Broker Quality Used Cars</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/font-awesome.min.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/elegant-icons.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/nice-select.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/magnific-popup.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/jquery-ui.min.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/owl.carousel.min.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/slicknav.min.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" type="text/css">
+
+    <style>
+        :root {
+            --lns-red: #e53935;
+            --lns-red-dark: #b71c1c;
+            --lns-black: #111111;
+            --lns-dark: #0b0b0b;
+            --lns-muted: #777777;
+            --lns-light: #f6f6f6;
+            --lns-border: #eeeeee;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            color: #222222;
+            background: #ffffff;
+        }
+
+        a,
+        button {
+            transition: all 0.25s ease;
+        }
+
+        /* =========================
+           PROFESSIONAL HEADER
+        ========================= */
+        .lns-header {
+            background: var(--lns-black);
+            position: relative;
+            z-index: 99;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.18);
+        }
+
+        .lns-header-top {
+            background: var(--lns-dark);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 9px 0;
+        }
+
+        .lns-top-info {
+            display: flex;
+            align-items: center;
+            gap: 22px;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            color: rgba(255, 255, 255, 0.72);
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .lns-top-info i,
+        .lns-phone i {
+            color: var(--lns-red);
+            margin-right: 7px;
+        }
+
+        .lns-top-right {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 18px;
+        }
+
+        .lns-phone {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 13px;
+            font-weight: 800;
+            white-space: nowrap;
+        }
+
+        .lns-social,
+        .lns-footer-social {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .lns-social a {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.08);
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            text-decoration: none;
+        }
+
+        .lns-social a:hover {
+            background: var(--lns-red);
+            color: #ffffff;
+            transform: translateY(-2px);
+        }
+
+        .lns-main-nav {
+            padding: 18px 0;
+        }
+
+        .lns-nav-wrap {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 28px;
+        }
+
+        .lns-logo {
+            color: #ffffff;
+            font-size: 28px;
+            font-weight: 900;
+            letter-spacing: 1px;
+            text-decoration: none;
+            white-space: nowrap;
+            line-height: 1;
+        }
+
+        .lns-logo:hover {
+            color: #ffffff;
+            text-decoration: none;
+        }
+
+        .lns-logo span {
+            color: var(--lns-red);
+        }
+
+        .lns-menu {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 4px;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            flex: 1;
+        }
+
+        .lns-menu>li {
+            position: relative;
+        }
+
+        .lns-menu>li>a {
+            display: block;
+            color: rgba(255, 255, 255, 0.86);
+            font-size: 14px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.7px;
+            padding: 12px 13px;
+            border-radius: 10px;
+            text-decoration: none;
+        }
+
+        .lns-menu>li:hover>a,
+        .lns-menu>li.active>a {
+            background: rgba(229, 57, 53, 0.14);
+            color: #ffffff;
+        }
+
+        .lns-menu>li.active>a {
+            color: var(--lns-red);
+        }
+
+        .lns-dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            min-width: 210px;
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 10px;
+            list-style: none;
+            margin: 10px 0 0;
+            box-shadow: 0 14px 40px rgba(0, 0, 0, 0.18);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            z-index: 100;
+        }
+
+        .lns-menu>li:hover .lns-dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .lns-dropdown li a {
+            display: block;
+            padding: 10px 12px;
+            color: #222222;
+            font-size: 13px;
+            font-weight: 800;
+            border-radius: 8px;
+            text-decoration: none;
+        }
+
+        .lns-dropdown li a:hover {
+            background: #fff5f5;
+            color: var(--lns-red);
+        }
+
+        .lns-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .lns-search-btn {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.09);
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+        }
+
+        .lns-search-btn:hover {
+            background: var(--lns-red);
+            color: #ffffff;
+            text-decoration: none;
+        }
+
+        .lns-sell-btn {
+            height: 42px;
+            padding: 0 18px;
+            background: var(--lns-red);
+            color: #ffffff;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.7px;
+            text-decoration: none;
+            box-shadow: 0 8px 20px rgba(229, 57, 53, 0.3);
+            white-space: nowrap;
+        }
+
+        .lns-sell-btn:hover {
+            background: var(--lns-red-dark);
+            color: #ffffff;
+            text-decoration: none;
+            transform: translateY(-2px);
+        }
+
+        .lns-mobile-open {
+            display: none;
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
+            background: var(--lns-red);
+            color: #ffffff;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        /* =========================
+           HOME PAGE SECTIONS
+        ========================= */
+        .pro-hero {
+            position: relative;
+            min-height: 760px;
+            display: flex;
+            align-items: center;
+            background-size: cover;
+            background-position: center;
+            overflow: hidden;
+        }
+
+        .pro-hero::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(90deg, rgba(0, 0, 0, 0.88) 0%, rgba(0, 0, 0, 0.72) 42%, rgba(0, 0, 0, 0.25) 100%),
+                linear-gradient(135deg, rgba(229, 57, 53, 0.28), transparent 45%);
+            z-index: 1;
+        }
+
+        .pro-hero .container {
+            position: relative;
+            z-index: 2;
+        }
+
+        .pro-hero-content {
+            max-width: 680px;
+        }
+
+        .pro-hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(229, 57, 53, 0.16);
+            border: 1px solid rgba(229, 57, 53, 0.35);
+            color: #ffffff;
+            padding: 9px 15px;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: 900;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        .pro-hero-badge i {
+            color: var(--lns-red);
+        }
+
+        .pro-hero h1 {
+            color: #ffffff;
+            font-size: 58px;
+            line-height: 1.08;
+            font-weight: 900;
+            margin-bottom: 18px;
+        }
+
+        .pro-hero h1 span {
+            color: var(--lns-red);
+        }
+
+        .pro-hero p {
+            color: rgba(255, 255, 255, 0.78);
+            font-size: 17px;
+            line-height: 1.9;
+            max-width: 590px;
+            margin-bottom: 30px;
+        }
+
+        .pro-hero-actions {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+            margin-bottom: 36px;
+        }
+
+        .pro-btn-red,
+        .pro-btn-dark {
+            height: 50px;
+            padding: 0 24px;
+            border-radius: 30px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 9px;
+            font-size: 13px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-decoration: none;
+        }
+
+        .pro-btn-red {
+            background: var(--lns-red);
+            color: #ffffff;
+            box-shadow: 0 12px 26px rgba(229, 57, 53, 0.35);
+        }
+
+        .pro-btn-red:hover {
+            background: var(--lns-red-dark);
+            color: #ffffff;
+            text-decoration: none;
+            transform: translateY(-2px);
+        }
+
+        .pro-btn-dark {
+            background: rgba(255, 255, 255, 0.08);
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .pro-btn-dark:hover {
+            background: #ffffff;
+            color: #111111;
+            text-decoration: none;
+            transform: translateY(-2px);
+        }
+
+        .pro-hero-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 150px);
+            gap: 14px;
+        }
+
+        .pro-stat-card {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            backdrop-filter: blur(8px);
+            border-radius: 16px;
+            padding: 18px 16px;
+        }
+
+        .pro-stat-card strong {
+            display: block;
+            color: #ffffff;
+            font-size: 28px;
+            font-weight: 900;
+            line-height: 1;
+        }
+
+        .pro-stat-card span {
+            display: block;
+            color: rgba(255, 255, 255, 0.66);
+            font-size: 12px;
+            font-weight: 800;
+            margin-top: 7px;
+        }
+
+        .pro-search-panel {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 28px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.22);
+            border-top: 5px solid var(--lns-red);
+        }
+
+        .pro-search-panel h3 {
+            color: #111111;
+            font-size: 22px;
+            font-weight: 900;
+            margin-bottom: 6px;
+        }
+
+        .pro-search-panel p {
+            color: var(--lns-muted);
+            font-size: 13px;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .pro-search-field {
+            margin-bottom: 14px;
+        }
+
+        .pro-search-field label {
+            display: block;
+            font-size: 12px;
+            font-weight: 900;
+            color: #111111;
+            text-transform: uppercase;
+            letter-spacing: 0.7px;
+            margin-bottom: 7px;
+        }
+
+        .pro-search-field select,
+        .pro-search-field input {
+            width: 100%;
+            height: 46px;
+            border: 1.5px solid #e7e7e7;
+            border-radius: 10px;
+            background: #fafafa;
+            padding: 0 14px;
+            font-size: 13px;
+            font-weight: 700;
+            color: #333333;
+            outline: none;
+        }
+
+        .pro-search-field select:focus,
+        .pro-search-field input:focus {
+            border-color: var(--lns-red);
+            background: #ffffff;
+            box-shadow: 0 0 0 4px rgba(229, 57, 53, 0.08);
+        }
+
+        .pro-search-btn {
+            width: 100%;
+            height: 50px;
+            border: none;
+            background: var(--lns-red);
+            color: #ffffff;
+            border-radius: 12px;
+            font-size: 13px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            margin-top: 8px;
+        }
+
+        .pro-search-btn:hover {
+            background: var(--lns-red-dark);
+        }
+
+        .pro-section {
+            padding: 90px 0;
+        }
+
+        .pro-section-light {
+            background: var(--lns-light);
+        }
+
+        .pro-section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .pro-section-title span {
+            color: var(--lns-red);
+            font-size: 12px;
+            font-weight: 900;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        .pro-section-title h2 {
+            color: #111111;
+            font-size: 38px;
+            font-weight: 900;
+            margin-top: 8px;
+            margin-bottom: 12px;
+        }
+
+        .pro-section-title p {
+            max-width: 650px;
+            margin: 0 auto;
+            color: var(--lns-muted);
+            line-height: 1.8;
+        }
+
+        .pro-service-card,
+        .pro-vehicle-card,
+        .pro-testimonial-card {
+            background: #ffffff;
+            border-radius: 18px;
+            height: 100%;
+            box-shadow: 0 10px 34px rgba(0, 0, 0, 0.07);
+            border: 1px solid var(--lns-border);
+            transition: 0.25s ease;
+        }
+
+        .pro-service-card:hover,
+        .pro-vehicle-card:hover,
+        .pro-testimonial-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 18px 45px rgba(0, 0, 0, 0.12);
+        }
+
+        .pro-service-card {
+            padding: 34px 26px;
+        }
+
+        .pro-service-icon {
+            width: 64px;
+            height: 64px;
+            background: #fff5f5;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 22px;
+        }
+
+        .pro-service-icon img {
+            max-width: 42px;
+        }
+
+        .pro-service-card h5 {
+            color: #111111;
+            font-size: 18px;
+            font-weight: 900;
+            margin-bottom: 12px;
+        }
+
+        .pro-service-card p {
+            color: var(--lns-muted);
+            font-size: 14px;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .pro-service-card a {
+            color: var(--lns-red);
+            font-weight: 900;
+            font-size: 13px;
+            text-decoration: none;
+        }
+
+        .pro-vehicle-card {
+            overflow: hidden;
+        }
+
+        .pro-vehicle-img {
+            height: 205px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pro-vehicle-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .pro-sale-badge,
+        .pro-year-badge {
+            position: absolute;
+            top: 14px;
+            border-radius: 30px;
+            font-size: 11px;
+            font-weight: 900;
+            text-transform: uppercase;
+        }
+
+        .pro-sale-badge {
+            left: 14px;
+            background: var(--lns-red);
+            color: #ffffff;
+            padding: 7px 12px;
+        }
+
+        .pro-year-badge {
+            right: 14px;
+            background: rgba(17, 17, 17, 0.86);
+            color: #ffffff;
+            padding: 7px 11px;
+        }
+
+        .pro-vehicle-body {
+            padding: 20px;
+        }
+
+        .pro-vehicle-body h5 {
+            font-size: 18px;
+            font-weight: 900;
+            margin-bottom: 13px;
+        }
+
+        .pro-vehicle-body h5 a {
+            color: #111111;
+            text-decoration: none;
+        }
+
+        .pro-vehicle-meta {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 16px;
+        }
+
+        .pro-vehicle-meta span {
+            background: #fafafa;
+            border: 1px solid var(--lns-border);
+            border-radius: 30px;
+            padding: 7px 10px;
+            font-size: 11px;
+            font-weight: 900;
+            color: #555555;
+        }
+
+        .pro-vehicle-price {
+            border-top: 1px solid var(--lns-border);
+            padding-top: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .pro-vehicle-price strong {
+            color: var(--lns-red);
+            font-size: 17px;
+            font-weight: 900;
+        }
+
+        .pro-view-link {
+            background: #111111;
+            color: #ffffff;
+            padding: 9px 13px;
+            border-radius: 10px;
+            font-size: 12px;
+            font-weight: 900;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+
+        .pro-view-link:hover {
+            background: var(--lns-red);
+            color: #ffffff;
+            text-decoration: none;
+        }
+
+        .pro-why {
+            background: #111111;
+            color: #ffffff;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pro-why::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(229, 57, 53, 0.16), transparent 45%);
+        }
+
+        .pro-why .container {
+            position: relative;
+            z-index: 2;
+        }
+
+        .pro-why h2 {
+            color: #ffffff;
+            font-size: 38px;
+            font-weight: 900;
+            margin-bottom: 18px;
+        }
+
+        .pro-why p {
+            color: rgba(255, 255, 255, 0.72);
+            line-height: 1.9;
+        }
+
+        .pro-why-list {
+            margin: 26px 0 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .pro-why-list li {
+            color: rgba(255, 255, 255, 0.82);
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 13px;
+        }
+
+        .pro-why-list i {
+            color: var(--lns-red);
+            margin-right: 9px;
+        }
+
+        .pro-badge-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 24px;
+        }
+
+        .pro-badge-row span {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: #ffffff;
+            padding: 10px 13px;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: 900;
+        }
+
+        .pro-feature-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+
+        .pro-feature-mini {
+            background: rgba(255, 255, 255, 0.07);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 18px;
+            padding: 22px;
+            text-align: center;
+        }
+
+        .pro-feature-mini img {
+            max-width: 48px;
+            margin-bottom: 14px;
+        }
+
+        .pro-feature-mini h6 {
+            color: #ffffff;
+            font-size: 14px;
+            font-weight: 900;
+            margin: 0;
+        }
+
+        .pro-testimonial-card {
+            padding: 30px;
+        }
+
+        .pro-stars {
+            color: var(--lns-red);
+            margin-bottom: 18px;
+        }
+
+        .pro-testimonial-card p {
+            color: #666666;
+            line-height: 1.9;
+            margin-bottom: 22px;
+            font-size: 14px;
+        }
+
+        .pro-author {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+        }
+
+        .pro-author img {
+            width: 54px;
+            height: 54px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .pro-author h6 {
+            font-weight: 900;
+            margin: 0 0 3px;
+            color: #111111;
+        }
+
+        .pro-author span {
+            color: #888888;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .pro-counter {
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            padding: 75px 0;
+        }
+
+        .pro-counter::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.78);
+        }
+
+        .pro-counter .container {
+            position: relative;
+            z-index: 2;
+        }
+
+        .pro-counter-card {
+            text-align: center;
+            padding: 24px;
+        }
+
+        .pro-counter-card h2 {
+            color: #ffffff;
+            font-size: 44px;
+            font-weight: 900;
+            margin-bottom: 8px;
+        }
+
+        .pro-counter-card h2 span {
+            color: var(--lns-red);
+        }
+
+        .pro-counter-card p {
+            color: rgba(255, 255, 255, 0.72);
+            font-size: 14px;
+            font-weight: 800;
+            margin: 0;
+        }
+
+        .pro-cta-box {
+            min-height: 270px;
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            background-size: cover;
+            background-position: center;
+            padding: 38px;
+            display: flex;
+            align-items: flex-end;
+            box-shadow: 0 16px 42px rgba(0, 0, 0, 0.14);
+        }
+
+        .pro-cta-box::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.82));
+        }
+
+        .pro-cta-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .pro-cta-content h4 {
+            color: #ffffff;
+            font-size: 24px;
+            font-weight: 900;
+            margin-bottom: 10px;
+        }
+
+        .pro-cta-content p {
+            color: rgba(255, 255, 255, 0.74);
+            line-height: 1.8;
+            margin-bottom: 18px;
+        }
+
+        /* =========================
+           PROFESSIONAL FOOTER
+        ========================= */
+        .lns-footer {
+            background: var(--lns-dark);
+            color: #ffffff;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .lns-footer::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(135deg, rgba(229, 57, 53, 0.12), transparent 38%),
+                linear-gradient(rgba(0, 0, 0, 0.86), rgba(0, 0, 0, 0.92));
+            z-index: 1;
+        }
+
+        .lns-footer .container {
+            position: relative;
+            z-index: 2;
+        }
+
+        .lns-footer-main {
+            padding: 70px 0 26px;
+        }
+
+        .lns-footer-cta {
+            background: var(--lns-red);
+            border-radius: 18px;
+            padding: 28px 34px;
+            margin-bottom: 52px;
+            box-shadow: 0 16px 36px rgba(229, 57, 53, 0.28);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+
+        .lns-footer-cta h2 {
+            color: #ffffff;
+            font-size: 26px;
+            font-weight: 900;
+            margin: 0 0 6px;
+        }
+
+        .lns-footer-cta p {
+            color: rgba(255, 255, 255, 0.82);
+            margin: 0;
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .lns-footer-contact {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .lns-contact-pill {
+            background: rgba(255, 255, 255, 0.14);
+            color: #ffffff;
+            padding: 12px 16px;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: 900;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .lns-contact-pill:hover {
+            background: #ffffff;
+            color: var(--lns-red);
+            text-decoration: none;
+            transform: translateY(-2px);
+        }
+
+        .lns-footer-logo {
+            color: #ffffff;
+            font-size: 30px;
+            font-weight: 900;
+            letter-spacing: 1px;
+            text-decoration: none;
+            display: inline-block;
+            margin-bottom: 18px;
+        }
+
+        .lns-footer-logo:hover {
+            color: #ffffff;
+            text-decoration: none;
+        }
+
+        .lns-footer-logo span {
+            color: var(--lns-red);
+        }
+
+        .lns-footer-about p {
+            color: rgba(255, 255, 255, 0.62);
+            font-size: 14px;
+            line-height: 1.9;
+            margin-bottom: 22px;
+            max-width: 330px;
+        }
+
+        .lns-footer-social a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.08);
+            color: #ffffff;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+        }
+
+        .lns-footer-social a:hover {
+            background: var(--lns-red);
+            color: #ffffff;
+            transform: translateY(-3px);
+            text-decoration: none;
+        }
+
+        .lns-footer-title {
+            color: #ffffff;
+            font-size: 16px;
+            font-weight: 900;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 12px;
+        }
+
+        .lns-footer-title::after {
+            content: "";
+            width: 34px;
+            height: 3px;
+            background: var(--lns-red);
+            border-radius: 20px;
+            position: absolute;
+            left: 0;
+            bottom: 0;
+        }
+
+        .lns-footer-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .lns-footer-links li {
+            margin-bottom: 11px;
+        }
+
+        .lns-footer-links a {
+            color: rgba(255, 255, 255, 0.62);
+            font-size: 14px;
+            font-weight: 700;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .lns-footer-links a i {
+            color: var(--lns-red);
+            font-size: 12px;
+        }
+
+        .lns-footer-links a:hover {
+            color: #ffffff;
+            text-decoration: none;
+            transform: translateX(4px);
+        }
+
+        .lns-footer-info-card {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 18px;
+            margin-bottom: 14px;
+        }
+
+        .lns-footer-info-card i {
+            color: var(--lns-red);
+            margin-right: 8px;
+        }
+
+        .lns-footer-info-card strong {
+            display: block;
+            color: #ffffff;
+            font-size: 13px;
+            font-weight: 900;
+            margin-bottom: 5px;
+        }
+
+        .lns-footer-info-card span,
+        .lns-footer-info-card a {
+            color: rgba(255, 255, 255, 0.62);
+            font-size: 13px;
+            line-height: 1.7;
+            text-decoration: none;
+        }
+
+        .lns-footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 20px 0;
+            margin-top: 36px;
+            display: flex;
+            justify-content: space-between;
+            gap: 16px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .lns-footer-bottom p {
+            color: rgba(255, 255, 255, 0.52);
+            margin: 0;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .lns-footer-bottom a {
+            color: var(--lns-red);
+            text-decoration: none;
+            font-weight: 900;
+        }
+
+        @media (max-width: 991px) {
+            .lns-header-top {
+                display: none;
+            }
+
+            .lns-menu,
+            .lns-actions {
+                display: none;
+            }
+
+            .lns-mobile-open {
+                display: flex;
+            }
+
+            .lns-main-nav {
+                padding: 16px 0;
+            }
+
+            .lns-logo {
+                font-size: 24px;
+            }
+
+            .pro-hero {
+                min-height: auto;
+                padding: 90px 0;
+            }
+
+            .pro-hero h1 {
+                font-size: 42px;
+            }
+
+            .pro-search-panel {
+                margin-top: 38px;
+            }
+
+            .pro-hero-stats {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 767px) {
+            .lns-footer-main {
+                padding: 48px 0 22px;
+            }
+
+            .lns-footer-cta {
+                padding: 24px 20px;
+                margin-bottom: 38px;
+            }
+
+            .lns-footer-cta h2 {
+                font-size: 22px;
+            }
+
+            .lns-footer-contact {
+                width: 100%;
+            }
+
+            .lns-contact-pill {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .lns-footer-title {
+                margin-top: 28px;
+            }
+
+            .pro-hero h1 {
+                font-size: 34px;
+            }
+
+            .pro-hero-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .pro-section-title h2,
+            .pro-why h2 {
+                font-size: 30px;
+            }
+
+            .pro-feature-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="preloder">
+        <div class="loader"></div>
+    </div>
+
+    <div class="offcanvas-menu-overlay"></div>
+    <div class="offcanvas-menu-wrapper">
+        <div class="offcanvas__widget">
+            <a href="{{ url_for('sell') }}" class="primary-btn">Sell Your Car</a>
+        </div>
+        <div class="offcanvas__logo">
+            <a href="{{ url_for('home') }}">
+                <strong style="font-size:22px;color:#fff;font-weight:900;letter-spacing:1px;">LNS <span
+                        style="color:#e53935;">CARz</span></strong>
+            </a>
+        </div>
+        <div id="mobile-menu-wrap"></div>
+        <ul class="offcanvas__widget__add">
+            <li><i class="fa fa-clock-o"></i> Mon–Sat: 08:00 am – 06:00 pm</li>
+            <li><i class="fa fa-envelope-o"></i> lnscarz7@gmail.com</li>
+        </ul>
+        <div class="offcanvas__phone__num">
+            <i class="fa fa-phone"></i>
+            <span>075 428 9843 / 077 883 5662</span>
+        </div>
+        <div class="offcanvas__social">
+            <a href="https://www.facebook.com/share/18AeLHQNXq/?mibextid=wwXIfr" target="_blank" title="Facebook"><i
+                    class="fa fa-facebook"></i></a>
+            <a href="https://www.instagram.com/lnscarz._?igsh=MTdoYXp4ZmlmMXpwYQ==" target="_blank" title="Instagram"><i
+                    class="fa fa-instagram"></i></a>
+            <a href="https://www.tiktok.com/@lnscarz?_r=1&_t=ZS-9574dbZN3p3" target="_blank" title="TikTok"><i
+                    class="fa fa-music"></i></a>
+            <a href="https://wa.me/94754289843" target="_blank" title="WhatsApp"><i class="fa fa-whatsapp"></i></a>
+        </div>
+    </div>
+
+    <header class="lns-header">
+        <div class="lns-header-top">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-7">
+                        <ul class="lns-top-info">
+                            <li><i class="fa fa-clock-o"></i> Mon–Sat: 08:00 am – 06:00 pm</li>
+                            <li><i class="fa fa-envelope-o"></i> lnscarz7@gmail.com</li>
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-5">
+                        <div class="lns-top-right">
+                            <div class="lns-phone">
+                                <i class="fa fa-phone"></i> 075 428 9843 / 077 883 5662
+                            </div>
+                            <div class="lns-social">
+                                <a href="https://www.facebook.com/share/18AeLHQNXq/?mibextid=wwXIfr" target="_blank"
+                                    title="Facebook"><i class="fa fa-facebook"></i></a>
+                                <a href="https://www.instagram.com/lnscarz._?igsh=MTdoYXp4ZmlmMXpwYQ==" target="_blank"
+                                    title="Instagram"><i class="fa fa-instagram"></i></a>
+                                <a href="https://www.tiktok.com/@lnscarz?_r=1&_t=ZS-9574dbZN3p3" target="_blank"
+                                    title="TikTok"><i class="fa fa-music"></i></a>
+                                <a href="https://wa.me/94754289843" target="_blank" title="WhatsApp"><i
+                                        class="fa fa-whatsapp"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="lns-main-nav">
+            <div class="container">
+                <div class="lns-nav-wrap">
+                    <a href="{{ url_for('home') }}" class="lns-logo">LNS <span>CARz</span></a>
+
+                    <ul class="lns-menu">
+                        <li class="{% if request.endpoint == 'home' %}active{% endif %}"><a
+                                href="{{ url_for('home') }}">Home</a></li>
+                        <li class="{% if request.endpoint == 'cars' %}active{% endif %}"><a
+                                href="{{ url_for('cars') }}">Cars</a></li>
+                        <li class="{% if request.endpoint == 'sell' %}active{% endif %}"><a
+                                href="{{ url_for('sell') }}">Sell Your Car</a></li>
+                        <li>
+                            <a href="#">Services <i class="fa fa-angle-down" style="margin-left:5px;"></i></a>
+                            <ul class="lns-dropdown">
+                                <li><a href="{{ url_for('brokering') }}">Brokering Service</a></li>
+                                <li><a href="{{ url_for('booking') }}">Book a Valuation</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#">Pages <i class="fa fa-angle-down" style="margin-left:5px;"></i></a>
+                            <ul class="lns-dropdown">
+                                <li><a href="{{ url_for('blog') }}">Blog</a></li>
+                                <li><a href="{{ url_for('blog_details') }}">Blog Details</a></li>
+                                <li><a href="{{ url_for('car_details') }}">Car Details</a></li>
+                            </ul>
+                        </li>
+                        <li class="{% if request.endpoint == 'about' %}active{% endif %}"><a
+                                href="{{ url_for('about') }}">About</a></li>
+                        <li class="{% if request.endpoint == 'contact' %}active{% endif %}"><a
+                                href="{{ url_for('contact') }}">Contact</a></li>
+                    </ul>
+
+                    <div class="lns-actions">
+                        <a href="#" class="lns-search-btn search-switch"><i class="fa fa-search"></i></a>
+                        <a href="{{ url_for('sell') }}" class="lns-sell-btn">Sell Your Car</a>
+                    </div>
+
+                    <div class="lns-mobile-open canvas__open"><span class="fa fa-bars"></span></div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="pro-hero set-bg" data-setbg="{{ url_for('static', filename='img/hero-bg.jpg') }}">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-7">
+                    <div class="pro-hero-content">
+                        <div class="pro-hero-badge">
+                            <i class="fa fa-star"></i> Sri Lanka's Trusted Vehicle Partner
+                        </div>
+
+                        <h1>Find, Sell & Broker Your <span>Dream Car</span></h1>
+
+                        <p>
+                            LNS CARz helps you buy quality vehicles, sell your car faster, and complete trusted vehicle
+                            deals with professional support in Sri Lanka.
+                        </p>
+
+                        <div class="pro-hero-actions">
+                            <a href="{{ url_for('cars') }}" class="pro-btn-red"><i class="fa fa-car"></i> Browse
+                                Cars</a>
+                            <a href="{{ url_for('sell') }}" class="pro-btn-dark"><i class="fa fa-money"></i> Sell Your
+                                Car</a>
+                        </div>
+
+                        <div class="pro-hero-stats">
+                            <div class="pro-stat-card">
+                                <strong>200+</strong>
+                                <span>Happy Customers</span>
+                            </div>
+                            <div class="pro-stat-card">
+                                <strong>50+</strong>
+                                <span>Cars Available</span>
+                            </div>
+                            <div class="pro-stat-card">
+                                <strong>5+</strong>
+                                <span>Years Experience</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-5">
+                    <div class="pro-search-panel">
+                        <h3>Quick Vehicle Search</h3>
+                        <p>Select your preferred vehicle details and browse matching cars.</p>
+
+                        <form action="{{ url_for('cars') }}" method="get">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="pro-search-field">
+                                        <label>Year</label>
+                                        <select name="search">
+                                            <option value="">Any Year</option>
+                                            <option>2024</option>
+                                            <option>2023</option>
+                                            <option>2022</option>
+                                            <option>2021</option>
+                                            <option>2020</option>
+                                            <option>2019</option>
+                                            <option>2018</option>
+                                            <option>2017</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="pro-search-field">
+                                        <label>Brand</label>
+                                        <select name="brand">
+                                            <option value="">Any Brand</option>
+                                            <option>Toyota</option>
+                                            <option>Honda</option>
+                                            <option>Nissan</option>
+                                            <option>Suzuki</option>
+                                            <option>BMW</option>
+                                            <option>Mercedes</option>
+                                            <option>Audi</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="pro-search-field">
+                                        <label>Model</label>
+                                        <input type="text" name="model" placeholder="e.g. Corolla">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="pro-search-field">
+                                        <label>Fuel Type</label>
+                                        <select name="fuel_type">
+                                            <option value="">Any Fuel</option>
+                                            <option>Petrol</option>
+                                            <option>Diesel</option>
+                                            <option>Hybrid</option>
+                                            <option>Electric</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="pro-search-btn"><i class="fa fa-search"></i> Search
+                                Cars</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="pro-section pro-section-light">
+        <div class="container">
+            <div class="pro-section-title">
+                <span>What We Offer</span>
+                <h2>Professional Vehicle Services</h2>
+                <p>At LNS CARz, we provide end-to-end automotive solutions for buyers, sellers, and vehicle owners
+                    across Sri Lanka.</p>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="pro-service-card">
+                        <div class="pro-service-icon"><img
+                                src="{{ url_for('static', filename='img/services/services-1.png') }}" alt=""></div>
+                        <h5>Buy a Car</h5>
+                        <p>Browse quality inspected used vehicles and find the right car for your budget.</p>
+                        <a href="{{ url_for('cars') }}">Browse Cars <i class="fa fa-long-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="pro-service-card">
+                        <div class="pro-service-icon"><img
+                                src="{{ url_for('static', filename='img/services/services-2.png') }}" alt=""></div>
+                        <h5>Sell Your Car</h5>
+                        <p>Submit your vehicle details online and receive professional support quickly.</p>
+                        <a href="{{ url_for('sell') }}">Sell Now <i class="fa fa-long-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="pro-service-card">
+                        <div class="pro-service-icon"><img
+                                src="{{ url_for('static', filename='img/services/services-3.png') }}" alt=""></div>
+                        <h5>Brokering Service</h5>
+                        <p>We connect buyers and sellers for smooth and transparent vehicle deals.</p>
+                        <a href="{{ url_for('brokering') }}">Learn More <i class="fa fa-long-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="pro-service-card">
+                        <div class="pro-service-icon"><img
+                                src="{{ url_for('static', filename='img/services/services-4.png') }}" alt=""></div>
+                        <h5>Book a Valuation</h5>
+                        <p>Get a professional vehicle valuation or inspection from our experienced team.</p>
+                        <a href="{{ url_for('booking') }}">Book Now <i class="fa fa-long-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="pro-section">
+        <div class="container">
+            <div class="pro-section-title">
+                <span>Our Vehicles</span>
+                <h2>Featured Car Listings</h2>
+                <p>Explore a selected set of quality vehicles available through LNS CARz.</p>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="pro-vehicle-card">
+                        <div class="pro-vehicle-img">
+                            <img src="{{ url_for('static', filename='img/cars/car-1.jpg') }}" alt="">
+                            <span class="pro-sale-badge">For Sale</span>
+                            <span class="pro-year-badge">2020</span>
+                        </div>
+                        <div class="pro-vehicle-body">
+                            <h5><a href="{{ url_for('car_details') }}">Toyota Corolla Altis</a></h5>
+                            <div class="pro-vehicle-meta"><span>45,000 km</span><span>Auto</span><span>Petrol</span>
+                            </div>
+                            <div class="pro-vehicle-price"><strong>LKR 8.5M</strong><a
+                                    href="{{ url_for('car_details') }}" class="pro-view-link">View</a></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="pro-vehicle-card">
+                        <div class="pro-vehicle-img">
+                            <img src="{{ url_for('static', filename='img/cars/car-2.jpg') }}" alt="">
+                            <span class="pro-sale-badge">For Sale</span>
+                            <span class="pro-year-badge">2019</span>
+                        </div>
+                        <div class="pro-vehicle-body">
+                            <h5><a href="{{ url_for('car_details') }}">Honda Vezel Hybrid</a></h5>
+                            <div class="pro-vehicle-meta"><span>38,000 km</span><span>Auto</span><span>Hybrid</span>
+                            </div>
+                            <div class="pro-vehicle-price"><strong>LKR 9.2M</strong><a
+                                    href="{{ url_for('car_details') }}" class="pro-view-link">View</a></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="pro-vehicle-card">
+                        <div class="pro-vehicle-img">
+                            <img src="{{ url_for('static', filename='img/cars/car-3.jpg') }}" alt="">
+                            <span class="pro-sale-badge">For Sale</span>
+                            <span class="pro-year-badge">2021</span>
+                        </div>
+                        <div class="pro-vehicle-body">
+                            <h5><a href="{{ url_for('car_details') }}">Nissan X-Trail 4WD</a></h5>
+                            <div class="pro-vehicle-meta"><span>22,000 km</span><span>Auto</span><span>Petrol</span>
+                            </div>
+                            <div class="pro-vehicle-price"><strong>LKR 14.5M</strong><a
+                                    href="{{ url_for('car_details') }}" class="pro-view-link">View</a></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="pro-vehicle-card">
+                        <div class="pro-vehicle-img">
+                            <img src="{{ url_for('static', filename='img/cars/car-4.jpg') }}" alt="">
+                            <span class="pro-sale-badge">For Sale</span>
+                            <span class="pro-year-badge">2018</span>
+                        </div>
+                        <div class="pro-vehicle-body">
+                            <h5><a href="{{ url_for('car_details') }}">Toyota Aqua Hybrid</a></h5>
+                            <div class="pro-vehicle-meta"><span>55,000 km</span><span>Auto</span><span>Hybrid</span>
+                            </div>
+                            <div class="pro-vehicle-price"><strong>LKR 6.8M</strong><a
+                                    href="{{ url_for('car_details') }}" class="pro-view-link">View</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="text-align:center;margin-top:28px;">
+                <a href="{{ url_for('cars') }}" class="pro-btn-red"><i class="fa fa-car"></i> View All Cars</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="pro-section pro-why">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <span
+                        style="color:#e53935;font-size:12px;font-weight:900;letter-spacing:1.5px;text-transform:uppercase;">Our
+                        Difference</span>
+                    <h2>Why Sri Lankans Trust LNS CARz</h2>
+                    <p>
+                        From the moment you walk through our doors — or visit us online — you'll experience a level of
+                        service, honesty, and expertise that sets us apart from every other dealership in Sri Lanka.
+                    </p>
+                    <div class="pro-badge-row">
+                        <span><i class="fa fa-shield"></i> Fully Inspected</span>
+                        <span><i class="fa fa-tag"></i> Best Prices</span>
+                        <span><i class="fa fa-handshake-o"></i> Trusted Broker</span>
+                        <span><i class="fa fa-star"></i> 5-Star Service</span>
+                    </div>
+                    <ul class="pro-why-list">
+                        <li><i class="fa fa-check-circle"></i> Every vehicle rigorously inspected, repaired, and
+                            certified before sale.</li>
+                        <li><i class="fa fa-check-circle"></i> Transparent, competitive pricing in LKR — no hidden fees,
+                            ever.</li>
+                        <li><i class="fa fa-check-circle"></i> Expert brokering service connecting private buyers and
+                            sellers seamlessly.</li>
+                        <li><i class="fa fa-check-circle"></i> Professional valuation by certified automotive experts.
+                        </li>
+                        <li><i class="fa fa-check-circle"></i> Quick, hassle-free process from enquiry to handover.</li>
+                    </ul>
+                    <a href="{{ url_for('about') }}" class="pro-btn-red" style="margin-top:18px;">Discover Our Story</a>
+                </div>
+
+                <div class="col-lg-5 offset-lg-1">
+                    <div class="pro-feature-grid">
+                        <div class="pro-feature-mini"><img
+                                src="{{ url_for('static', filename='img/feature/feature-1.png') }}" alt="">
+                            <h6>Engine Check</h6>
+                        </div>
+                        <div class="pro-feature-mini"><img
+                                src="{{ url_for('static', filename='img/feature/feature-2.png') }}" alt="">
+                            <h6>Turbo</h6>
+                        </div>
+                        <div class="pro-feature-mini"><img
+                                src="{{ url_for('static', filename='img/feature/feature-3.png') }}" alt="">
+                            <h6>Cooling</h6>
+                        </div>
+                        <div class="pro-feature-mini"><img
+                                src="{{ url_for('static', filename='img/feature/feature-4.png') }}" alt="">
+                            <h6>Suspension</h6>
+                        </div>
+                        <div class="pro-feature-mini"><img
+                                src="{{ url_for('static', filename='img/feature/feature-5.png') }}" alt="">
+                            <h6>Electrical</h6>
+                        </div>
+                        <div class="pro-feature-mini"><img
+                                src="{{ url_for('static', filename='img/feature/feature-6.png') }}" alt="">
+                            <h6>Brakes</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="pro-section pro-section-light">
+        <div class="container">
+            <div class="pro-section-title">
+                <span>Customer Stories</span>
+                <h2>What Our Customers Say</h2>
+                <p>Hundreds of Sri Lankans have found their dream car with LNS CARz. Here's what some of them have to
+                    say.</p>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="pro-testimonial-card">
+                        <div class="pro-stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i
+                                class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></div>
+                        <p>"I bought my Toyota Vezel from LNS CARz and the experience was outstanding. The team was
+                            honest about the vehicle's condition, pricing was fair, and the handover was smooth. Highly
+                            recommend!"</p>
+                        <div class="pro-author"><img
+                                src="{{ url_for('static', filename='img/testimonial/testimonial-1.png') }}" alt="">
+                            <div>
+                                <h6>Chamara Perera</h6><span>Toyota Vezel Buyer — Colombo</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="pro-testimonial-card">
+                        <div class="pro-stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i
+                                class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></div>
+                        <p>"I used LNS CARz's brokering service to sell my Honda Fit and got an excellent price. They
+                            handled everything — inspection, documentation, and the buyer. Couldn't have been easier!"
+                        </p>
+                        <div class="pro-author"><img
+                                src="{{ url_for('static', filename='img/testimonial/testimonial-2.png') }}" alt="">
+                            <div>
+                                <h6>Nishantha Silva</h6><span>Vehicle Seller — Kandy</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="pro-testimonial-card">
+                        <div class="pro-stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i
+                                class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i></div>
+                        <p>"The valuation service was incredibly professional. They assessed my car thoroughly and gave
+                            me a market-accurate price. The entire team at LNS CARz was friendly and knowledgeable."</p>
+                        <div class="pro-author"><img src="{{ url_for('static', filename='img/about/team-3.jpg') }}"
+                                alt="">
+                            <div>
+                                <h6>Dilini Jayawardena</h6><span>Valuation Customer — Gampaha</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="pro-counter set-bg" data-setbg="{{ url_for('static', filename='img/counter-bg.jpg') }}">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6">
+                    <div class="pro-counter-card">
+                        <h2>200<span>+</span></h2>
+                        <p>Happy Customers</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="pro-counter-card">
+                        <h2>50<span>+</span></h2>
+                        <p>Cars Available Now</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="pro-counter-card">
+                        <h2>5<span>+</span></h2>
+                        <p>Years of Experience</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="pro-counter-card">
+                        <h2>100<span>%</span></h2>
+                        <p>Transparent Pricing</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="pro-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 mb-4">
+                    <div class="pro-cta-box set-bg" data-setbg="{{ url_for('static', filename='img/cta/cta-1.jpg') }}">
+                        <div class="pro-cta-content">
+                            <h4>Looking to Buy a Quality Car?</h4>
+                            <p>Browse our carefully curated selection of refurbished vehicles — all priced fairly in LKR
+                                with no hidden costs.</p>
+                            <a href="{{ url_for('cars') }}" class="pro-btn-red"><i class="fa fa-car"></i> Browse All
+                                Cars</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 col-md-6 mb-4">
+                    <div class="pro-cta-box set-bg" data-setbg="{{ url_for('static', filename='img/cta/cta-2.jpg') }}">
+                        <div class="pro-cta-content">
+                            <h4>Ready to Sell Your Car?</h4>
+                            <p>Get the best market value for your vehicle. Submit online and our team will contact you
+                                within 24 hours.</p>
+                            <a href="{{ url_for('sell') }}" class="pro-btn-red"><i class="fa fa-money"></i> Get a Free
+                                Quote</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="lns-footer set-bg" data-setbg="{{ url_for('static', filename='img/footer-bg.jpg') }}">
+        <div class="lns-footer-main">
+            <div class="container">
+                <div class="lns-footer-cta">
+                    <div>
+                        <h2>Contact LNS CARz Today!</h2>
+                        <p>Ready to buy, sell, or value your vehicle? Our team is ready to help.</p>
+                    </div>
+                    <div class="lns-footer-contact">
+                        <a href="tel:+94754289843" class="lns-contact-pill"><i class="fa fa-phone"></i> 075 428 9843</a>
+                        <a href="https://wa.me/94754289843" target="_blank" class="lns-contact-pill"><i
+                                class="fa fa-whatsapp"></i> WhatsApp Us</a>
+                        <a href="mailto:lnscarz7@gmail.com" class="lns-contact-pill"><i class="fa fa-envelope-o"></i>
+                            Email Us</a>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-4 col-md-6">
+                        <div class="lns-footer-about">
+                            <a href="{{ url_for('home') }}" class="lns-footer-logo">LNS <span>CARz</span></a>
+                            <p>NO:272/D Robert Gunawardana Mw, Pelawatta, Sri Lanka.<br>Rev Up Your Ride — Sri Lanka's
+                                trusted vehicle partner for buying, selling, brokering, and vehicle valuation.</p>
+                            <div class="lns-footer-social">
+                                <a href="https://www.facebook.com/share/18AeLHQNXq/?mibextid=wwXIfr" target="_blank"
+                                    title="Facebook"><i class="fa fa-facebook"></i></a>
+                                <a href="https://www.instagram.com/lnscarz._?igsh=MTdoYXp4ZmlmMXpwYQ==" target="_blank"
+                                    title="Instagram"><i class="fa fa-instagram"></i></a>
+                                <a href="https://www.tiktok.com/@lnscarz?_r=1&_t=ZS-9574dbZN3p3" target="_blank"
+                                    title="TikTok"><i class="fa fa-music"></i></a>
+                                <a href="https://wa.me/94754289843" target="_blank" title="WhatsApp"><i
+                                        class="fa fa-whatsapp"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-2 offset-lg-1 col-md-3">
+                        <h5 class="lns-footer-title">Quick Links</h5>
+                        <ul class="lns-footer-links">
+                            <li><a href="{{ url_for('home') }}"><i class="fa fa-angle-right"></i> Home</a></li>
+                            <li><a href="{{ url_for('cars') }}"><i class="fa fa-angle-right"></i> Browse Cars</a></li>
+                            <li><a href="{{ url_for('sell') }}"><i class="fa fa-angle-right"></i> Sell Your Car</a></li>
+                            <li><a href="{{ url_for('about') }}"><i class="fa fa-angle-right"></i> About Us</a></li>
+                            <li><a href="{{ url_for('contact') }}"><i class="fa fa-angle-right"></i> Contact</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-2 col-md-3">
+                        <h5 class="lns-footer-title">Our Services</h5>
+                        <ul class="lns-footer-links">
+                            <li><a href="{{ url_for('cars') }}"><i class="fa fa-angle-right"></i> Buy a Car</a></li>
+                            <li><a href="{{ url_for('sell') }}"><i class="fa fa-angle-right"></i> Sell a Car</a></li>
+                            <li><a href="{{ url_for('brokering') }}"><i class="fa fa-angle-right"></i> Brokering</a>
+                            </li>
+                            <li><a href="{{ url_for('booking') }}"><i class="fa fa-angle-right"></i> Book Valuation</a>
+                            </li>
+                            <li><a href="{{ url_for('blog') }}"><i class="fa fa-angle-right"></i> Blog</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6">
+                        <h5 class="lns-footer-title">Get In Touch</h5>
+                        <div class="lns-footer-info-card"><strong><i class="fa fa-phone"></i> Phone</strong><span>075
+                                428 9843 / 077 883 5662</span></div>
+                        <div class="lns-footer-info-card"><strong><i class="fa fa-envelope-o"></i> Email</strong><a
+                                href="mailto:lnscarz7@gmail.com">lnscarz7@gmail.com</a></div>
+                        <div class="lns-footer-info-card"><strong><i class="fa fa-clock-o"></i> Business
+                                Hours</strong><span>Mon–Sat: 08:00 am – 06:00 pm</span></div>
+                        <div class="lns-footer-info-card"><strong><i class="fa fa-map-marker"></i>
+                                Location</strong><span>Pelawatta, Sri Lanka</span></div>
+                    </div>
+                </div>
+
+                <div class="lns-footer-bottom">
+                    <p>Copyright &copy;
+                        <script>document.write(new Date().getFullYear());</script> LNS CARz. All rights reserved.
+                    </p>
+                    <p>Rev Up Your Ride! 🏎️ | <a href="{{ url_for('contact') }}">Contact Us</a></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div class="search-model">
+        <div class="h-100 d-flex align-items-center justify-content-center">
+            <div class="search-close-switch">+</div>
+            <form class="search-model-form">
+                <input type="text" id="search-input" placeholder="Search cars by brand, model...">
+            </form>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/jquery-3.3.1.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.nice-select.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery-ui.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.magnific-popup.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/mixitup.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.slicknav.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/owl.carousel.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+
+</html>

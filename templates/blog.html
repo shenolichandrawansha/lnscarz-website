@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="zxx">
+
+<style>
+    .lns-header {
+        background: #111111;
+        position: relative;
+        z-index: 99;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.18);
+    }
+
+    .lns-header-top {
+        background: #0b0b0b;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        padding: 9px 0;
+    }
+
+    .lns-top-info {
+        display: flex;
+        align-items: center;
+        gap: 22px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        color: rgba(255, 255, 255, 0.72);
+        font-size: 13px;
+        font-weight: 700;
+    }
+
+    .lns-top-info i {
+        color: #e53935;
+        margin-right: 7px;
+    }
+
+    .lns-top-right {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 18px;
+    }
+
+    .lns-phone {
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 13px;
+        font-weight: 800;
+        white-space: nowrap;
+    }
+
+    .lns-phone i {
+        color: #e53935;
+        margin-right: 7px;
+    }
+
+    .lns-social {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .lns-social a {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.08);
+        color: #ffffff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 13px;
+        transition: all 0.25s ease;
+        text-decoration: none;
+    }
+
+    .lns-social a:hover {
+        background: #e53935;
+        color: #ffffff;
+        transform: translateY(-2px);
+    }
+
+    .lns-main-nav {
+        padding: 18px 0;
+    }
+
+    .lns-nav-wrap {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 28px;
+    }
+
+    .lns-logo {
+        color: #ffffff;
+        font-size: 28px;
+        font-weight: 900;
+        letter-spacing: 1px;
+        text-decoration: none;
+        white-space: nowrap;
+        line-height: 1;
+    }
+
+    .lns-logo:hover {
+        color: #ffffff;
+        text-decoration: none;
+    }
+
+    .lns-logo span {
+        color: #e53935;
+    }
+
+    .lns-menu {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 4px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        flex: 1;
+    }
+
+    .lns-menu>li {
+        position: relative;
+    }
+
+    .lns-menu>li>a {
+        display: block;
+        color: rgba(255, 255, 255, 0.86);
+        font-size: 14px;
+        font-weight: 900;
+        text-transform: uppercase;
+        letter-spacing: 0.7px;
+        padding: 12px 13px;
+        border-radius: 10px;
+        text-decoration: none;
+        transition: all 0.25s ease;
+    }
+
+    .lns-menu>li:hover>a,
+    .lns-menu>li.active>a {
+        background: rgba(229, 57, 53, 0.14);
+        color: #ffffff;
+    }
+
+    .lns-menu>li.active>a {
+        color: #e53935;
+    }
+
+    .lns-dropdown {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        min-width: 210px;
+        background: #ffffff;
+        border-radius: 12px;
+        padding: 10px;
+        list-style: none;
+        margin: 10px 0 0;
+        box-shadow: 0 14px 40px rgba(0, 0, 0, 0.18);
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(10px);
+        transition: all 0.25s ease;
+        z-index: 100;
+    }
+
+    .lns-menu>li:hover .lns-dropdown {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+
+    .lns-dropdown li a {
+        display: block;
+        padding: 10px 12px;
+        color: #222222;
+        font-size: 13px;
+        font-weight: 800;
+        border-radius: 8px;
+        text-decoration: none;
+        transition: all 0.2s ease;
+    }
+
+    .lns-dropdown li a:hover {
+        background: #fff5f5;
+        color: #e53935;
+    }
+
+    .lns-actions {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .lns-search-btn {
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.09);
+        color: #ffffff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        transition: all 0.25s ease;
+    }
+
+    .lns-search-btn:hover {
+        background: #e53935;
+        color: #ffffff;
+        text-decoration: none;
+    }
+
+    .lns-sell-btn {
+        height: 42px;
+        padding: 0 18px;
+        background: #e53935;
+        color: #ffffff;
+        border-radius: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 13px;
+        font-weight: 900;
+        text-transform: uppercase;
+        letter-spacing: 0.7px;
+        text-decoration: none;
+        box-shadow: 0 8px 20px rgba(229, 57, 53, 0.3);
+        transition: all 0.25s ease;
+        white-space: nowrap;
+    }
+
+    .lns-sell-btn:hover {
+        background: #b71c1c;
+        color: #ffffff;
+        text-decoration: none;
+        transform: translateY(-2px);
+    }
+
+    .lns-mobile-open {
+        display: none;
+        width: 42px;
+        height: 42px;
+        border-radius: 10px;
+        background: #e53935;
+        color: #ffffff;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        cursor: pointer;
+    }
+
+    @media (max-width: 991px) {
+        .lns-header-top {
+            display: none;
+        }
+
+        .lns-menu,
+        .lns-actions {
+            display: none;
+        }
+
+        .lns-mobile-open {
+            display: flex;
+        }
+
+        .lns-main-nav {
+            padding: 16px 0;
+        }
+
+        .lns-logo {
+            font-size: 24px;
+        }
+    }
+</style>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="LNS CARz - Buy, Sell & Broker Quality Used Cars in Sri Lanka">
+    <meta name="keywords" content="LNS CARz, used cars, buy car, sell car, Sri Lanka, Pelawatta">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>LNS CARz</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/font-awesome.min.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/elegant-icons.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/nice-select.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/magnific-popup.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/jquery-ui.min.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/owl.carousel.min.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/slicknav.min.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" type="text/css">
+</head>
+
+<body>
+    <!-- Page Preloder -->
+    <div id="preloder">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Offcanvas Menu Begin -->
+    <div class="offcanvas-menu-overlay"></div>
+    <div class="offcanvas-menu-wrapper">
+        <div class="offcanvas__widget">
+            <a href="#" class="search-switch"><i class="fa fa-search"></i></a>
+            <a href="{{ url_for('sell') }}" class="primary-btn">Sell Your Car</a>
+        </div>
+        <div class="offcanvas__logo"><a href="{{ url_for('home') }}"><strong
+                    style="font-size:22px;color:#fff;font-weight:900;letter-spacing:1px;">LNS <span
+                        style="color:#e53935;">CARz</span></strong></a></div>
+        <div id="mobile-menu-wrap"></div>
+        <ul class="offcanvas__widget__add">
+            <li><i class="fa fa-clock-o"></i> Mon–Sat: 08:00 am – 06:00 pm</li>
+            <li><i class="fa fa-envelope-o"></i> lnscarz7@gmail.com</li>
+        </ul>
+        <div class="offcanvas__phone__num">
+            <i class="fa fa-phone"></i>
+            <span>075 428 9843</span>
+        </div>
+        <div class="offcanvas__social">
+            <a href="https://www.facebook.com/share/18AeLHQNXq/?mibextid=wwXIfr" target="_blank" title="Facebook"><i
+                    class="fa fa-facebook"></i></a>
+            <a href="https://www.instagram.com/lnscarz._?igsh=MTdoYXp4ZmlmMXpwYQ==" target="_blank" title="Instagram"><i
+                    class="fa fa-instagram"></i></a>
+            <a href="https://www.tiktok.com/@lnscarz?_r=1&_t=ZS-9574dbZN3p3" target="_blank" title="TikTok"><i
+                    class="fa fa-music"></i></a>
+            <a href="https://wa.me/94754289843" target="_blank" title="WhatsApp"><i class="fa fa-whatsapp"></i></a>
+        </div>
+    </div>
+    <!-- Offcanvas Menu End -->
+
+    <!-- Header Section Begin -->
+    <header class="lns-header">
+        <div class="lns-header-top">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-7">
+                        <ul class="lns-top-info">
+                            <li>
+                                <i class="fa fa-clock-o"></i>
+                                Mon–Sat: 08:00 am – 06:00 pm
+                            </li>
+                            <li>
+                                <i class="fa fa-envelope-o"></i>
+                                lnscarz7@gmail.com
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-5">
+                        <div class="lns-top-right">
+                            <div class="lns-phone">
+                                <i class="fa fa-phone"></i>
+                                075 428 9843 / 077 883 5662
+                            </div>
+
+                            <div class="lns-social">
+                                <a href="https://www.facebook.com/share/18AeLHQNXq/?mibextid=wwXIfr" target="_blank"
+                                    title="Facebook">
+                                    <i class="fa fa-facebook"></i>
+                                </a>
+                                <a href="https://www.instagram.com/lnscarz._?igsh=MTdoYXp4ZmlmMXpwYQ==" target="_blank"
+                                    title="Instagram">
+                                    <i class="fa fa-instagram"></i>
+                                </a>
+                                <a href="https://www.tiktok.com/@lnscarz?_r=1&_t=ZS-9574dbZN3p3" target="_blank"
+                                    title="TikTok">
+                                    <i class="fa fa-music"></i>
+                                </a>
+                                <a href="https://wa.me/94754289843" target="_blank" title="WhatsApp">
+                                    <i class="fa fa-whatsapp"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="lns-main-nav">
+            <div class="container">
+                <div class="lns-nav-wrap">
+                    <a href="{{ url_for('home') }}" class="lns-logo">
+                        LNS <span>CARz</span>
+                    </a>
+
+                    <ul class="lns-menu">
+                        <li class="{% if request.endpoint == 'home' %}active{% endif %}">
+                            <a href="{{ url_for('home') }}">Home</a>
+                        </li>
+
+                        <li class="{% if request.endpoint == 'cars' %}active{% endif %}">
+                            <a href="{{ url_for('cars') }}">Cars</a>
+                        </li>
+
+                        <li class="{% if request.endpoint == 'sell' %}active{% endif %}">
+                            <a href="{{ url_for('sell') }}">Sell Your Car</a>
+                        </li>
+
+                        <li>
+                            <a href="#">Services <i class="fa fa-angle-down" style="margin-left:5px;"></i></a>
+                            <ul class="lns-dropdown">
+                                <li>
+                                    <a href="{{ url_for('brokering') }}">Brokering Service</a>
+                                </li>
+                                <li>
+                                    <a href="{{ url_for('booking') }}">Book a Valuation</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li>
+                            <a href="#">Pages <i class="fa fa-angle-down" style="margin-left:5px;"></i></a>
+                            <ul class="lns-dropdown">
+                                <li>
+                                    <a href="{{ url_for('blog') }}">Blog</a>
+                                </li>
+                                <li>
+                                    <a href="{{ url_for('blog_details') }}">Blog Details</a>
+                                </li>
+                                <li>
+                                    <a href="{{ url_for('car_details') }}">Car Details</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="{% if request.endpoint == 'about' %}active{% endif %}">
+                            <a href="{{ url_for('about') }}">About</a>
+                        </li>
+
+                        <li class="{% if request.endpoint == 'contact' %}active{% endif %}">
+                            <a href="{{ url_for('contact') }}">Contact</a>
+                        </li>
+                    </ul>
+
+                    <div class="lns-actions">
+                        <a href="#" class="lns-search-btn search-switch">
+                            <i class="fa fa-search"></i>
+                        </a>
+
+                        <a href="{{ url_for('sell') }}" class="lns-sell-btn">
+                            Sell Your Car
+                        </a>
+                    </div>
+
+                    <div class="lns-mobile-open canvas__open">
+                        <span class="fa fa-bars"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- Header Section End -->
+
+    <!-- Breadcrumb End -->
+    <div class="breadcrumb-option set-bg" data-setbg="{{ url_for('static', filename='img/breadcrumb-bg.jpg') }}">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="breadcrumb__text">
+                        <h2>Latest Blogs</h2>
+                        <div class="breadcrumb__links">
+                            <a href="{{ url_for('home') }}"><i class="fa fa-home"></i> Home</a>
+                            <span>Our Blogs</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Breadcrumb Begin -->
+
+    <!-- Blog Section Begin -->
+    <section class="blog spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-9">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+                            <div class="blog__item">
+                                <div class="blog__item__pic set-bg"
+                                    data-setbg="{{ url_for('static', filename='img/blog/blog-1.jpg') }}">
+                                    <ul>
+                                        <li>By Kasun Perera</li>
+                                        <li>Dec 11, 2018</li>
+                                        <li>8 Comment</li>
+                                    </ul>
+                                </div>
+                                <div class="blog__item__text">
+                                    <h5><a href="#">How to Choose the Right Used Car</a></h5>
+                                    <p>Great business ideas when utilized effectively can save lots of money. This is
+                                        not only easy for those who work full-time as an advertiser...</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+                            <div class="blog__item">
+                                <div class="blog__item__pic set-bg"
+                                    data-setbg="{{ url_for('static', filename='img/blog/blog-2.jpg') }}">
+                                    <ul>
+                                        <li>By Sanduni Rajapaksa</li>
+                                        <li>Dec 17, 2018</li>
+                                        <li>Comment</li>
+                                    </ul>
+                                </div>
+                                <div class="blog__item__text">
+                                    <h5><a href="#">Where To Look For Cheap Brochure</a></h5>
+                                    <p>Usually potential customers will visit home for business dealing. Print good
+                                        amount of fliers and give it to anyone who is visiting home like family...</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+                            <div class="blog__item">
+                                <div class="blog__item__pic set-bg"
+                                    data-setbg="{{ url_for('static', filename='img/blog/blog-3.jpg') }}">
+                                    <ul>
+                                        <li>By Ruwan Bandara</li>
+                                        <li>Dec 19, 2018</li>
+                                        <li>Comment</li>
+                                    </ul>
+                                </div>
+                                <div class="blog__item__text">
+                                    <h5><a href="#">Promotional Advertising Specialty</a></h5>
+                                    <p>For those who work outside home, employ college students to distribute fliers at
+                                        supermarkets, community centers...</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+                            <div class="blog__item">
+                                <div class="blog__item__pic set-bg"
+                                    data-setbg="{{ url_for('static', filename='img/blog/blog-4.jpg') }}">
+                                    <ul>
+                                        <li>By Lahiru Dissanayake</li>
+                                        <li>Dec 22, 2018</li>
+                                        <li>Comment</li>
+                                    </ul>
+                                </div>
+                                <div class="blog__item__text">
+                                    <h5><a href="#">Using Banner Stands To Increase</a></h5>
+                                    <p>Spread the word by the mouth. Talk to everyone about the product and ask them to
+                                        talk about it to others...</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+                            <div class="blog__item">
+                                <div class="blog__item__pic set-bg"
+                                    data-setbg="{{ url_for('static', filename='img/blog/blog-5.jpg') }}">
+                                    <ul>
+                                        <li>By Dinusha Wickramasinghe</li>
+                                        <li>Dec 25, 2018</li>
+                                        <li>2 Comment</li>
+                                    </ul>
+                                </div>
+                                <div class="blog__item__text">
+                                    <h5><a href="#">3 Smart Reasons Why You Should </a></h5>
+                                    <p>It’s a very powerful tool to increase the network and doesn’t even cost anything.
+                                        When receiving a casual call from family members and friends...</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+                            <div class="blog__item">
+                                <div class="blog__item__pic set-bg"
+                                    data-setbg="{{ url_for('static', filename='img/blog/blog-6.jpg') }}">
+                                    <ul>
+                                        <li>By Kasun Perera</li>
+                                        <li>Dec 27, 2018</li>
+                                        <li>6 Comment</li>
+                                    </ul>
+                                </div>
+                                <div class="blog__item__text">
+                                    <h5><a href="#">Search Engine Optimization And</a></h5>
+                                    <p>Some businesses place a jar at the reception counter where the business cards can
+                                        be dropped for future reference, while visiting them...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pagination__option">
+                        <a href="#" class="active">1</a>
+                        <a href="#">2</a>
+                        <a href="#">3</a>
+                        <a href="#"><span class="arrow_carrot-2right"></span></a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-9">
+                    <div class="blog__sidebar">
+                        <form action="#" class="blog__sidebar__search">
+                            <input type="text" placeholder="Search...">
+                            <button type="submit"><i class="fa fa-search"></i></button>
+                        </form>
+                        <div class="blog__sidebar__feature">
+                            <h4>Feature News</h4>
+                            <div class="blog__sidebar__feature__item">
+                                <h6><a href="#">Where To Look For Cheap Brochure</a></h6>
+                                <ul>
+                                    <li>By Kasun Perera</li>
+                                    <li>Dec 27, 2018</li>
+                                </ul>
+                            </div>
+                            <div class="blog__sidebar__feature__item">
+                                <h6><a href="#">Using Banner Stands To Increase</a></h6>
+                                <ul>
+                                    <li>By Sanduni Rajapaksa</li>
+                                    <li>Dec 17, 2018</li>
+                                </ul>
+                            </div>
+                            <div class="blog__sidebar__feature__item">
+                                <h6><a href="#">Promotional Advertising Specialty</a></h6>
+                                <ul>
+                                    <li>By Lahiru Dissanayake</li>
+                                    <li>Dec 22, 2018</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="blog__sidebar__categories">
+                            <h4>Categories</h4>
+                            <ul>
+                                <li><a href="#">Creativity</a></li>
+                                <li><a href="#">Design</a></li>
+                                <li><a href="#">Inspiration</a></li>
+                                <li><a href="#">News</a></li>
+                            </ul>
+                        </div>
+                        <div class="blog__sidebar__tag">
+                            <h4>Tag</h4>
+                            <a href="#">Car Dealer</a>
+                            <a href="#">bmw</a>
+                            <a href="#">Chevrolet</a>
+                            <a href="#">ferrari</a>
+                            <a href="#">Honda</a>
+                            <a href="#">Hatchback</a>
+                        </div>
+                        <div class="blog__sidebar__newslatter">
+                            <h4>Newsletter</h4>
+                            <p>Subscribe our newsletter gor get</p>
+                            <form action="#">
+                                <input type="text" placeholder="Your email">
+                                <button type="submit">Subscribe</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Blog Section End -->
+
+    <!-- Footer Section Begin -->
+    <footer class="footer set-bg" data-setbg="{{ url_for('static', filename='img/footer-bg.jpg') }}">
+        <div class="container">
+            <div class="footer__contact">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6">
+                        <div class="footer__contact__title">
+                            <h2>Contact LNS CARz Today!</h2>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <div class="footer__contact__option">
+                            <div class="option__item"><i class="fa fa-phone"></i> 075 428 9843 / 077 883 5662</div>
+                            <div class="option__item email"><i class="fa fa-envelope-o"></i> lnscarz7@gmail.com</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="footer__about">
+                        <a href="{{ url_for('home') }}"
+                            style="font-size:28px;font-weight:900;color:#fff;text-decoration:none;letter-spacing:1px;">LNS
+                            <span style="color:#e53935;">CARz</span></a>
+                        <p style="margin-top:14px;font-size:13px;line-height:1.9;color:rgba(255,255,255,0.55);">NO:272/D
+                            Robert Gunawardana Mw, Pelawatta, Sri Lanka.<br>Rev Up Your Ride — Sri Lanka's Trusted
+                            Vehicle Partner.</p>
+                        <div class="footer__social">
+                            <a href="https://www.facebook.com/share/18AeLHQNXq/?mibextid=wwXIfr" target="_blank"
+                                class="facebook" title="Facebook"><i class="fa fa-facebook"></i></a>
+                            <a href="https://www.instagram.com/lnscarz._?igsh=MTdoYXp4ZmlmMXpwYQ==" target="_blank"
+                                title="Instagram" style="margin-right:8px;"><i class="fa fa-instagram"></i></a>
+                            <a href="https://www.tiktok.com/@lnscarz?_r=1&_t=ZS-9574dbZN3p3" target="_blank"
+                                title="TikTok" style="margin-right:8px;"><i class="fa fa-music"></i></a>
+                            <a href="https://wa.me/94754289843" target="_blank" class="google" title="WhatsApp"><i
+                                    class="fa fa-whatsapp"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 offset-lg-1 col-md-3">
+                    <div class="footer__widget">
+                        <h5>Quick Links</h5>
+                        <ul>
+                            <li><a href="{{ url_for('home') }}"><i class="fa fa-angle-right"></i> Home</a></li>
+                            <li><a href="{{ url_for('cars') }}"><i class="fa fa-angle-right"></i> Browse Cars</a></li>
+                            <li><a href="{{ url_for('sell') }}"><i class="fa fa-angle-right"></i> Sell Your Car</a></li>
+                            <li><a href="{{ url_for('about') }}"><i class="fa fa-angle-right"></i> About Us</a></li>
+                            <li><a href="{{ url_for('contact') }}"><i class="fa fa-angle-right"></i> Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-3">
+                    <div class="footer__widget">
+                        <h5>Our Services</h5>
+                        <ul>
+                            <li><a href="{{ url_for('cars') }}"><i class="fa fa-angle-right"></i> Buy a Car</a></li>
+                            <li><a href="{{ url_for('sell') }}"><i class="fa fa-angle-right"></i> Sell a Car</a></li>
+                            <li><a href="{{ url_for('brokering') }}"><i class="fa fa-angle-right"></i> Brokering</a>
+                            </li>
+                            <li><a href="{{ url_for('booking') }}"><i class="fa fa-angle-right"></i> Book Valuation</a>
+                            </li>
+                            <li><a href="{{ url_for('blog') }}"><i class="fa fa-angle-right"></i> Blog</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer__brand">
+                        <h5>Follow Us</h5>
+                        <ul>
+                            <li><a href="https://www.facebook.com/share/18AeLHQNXq/?mibextid=wwXIfr" target="_blank"><i
+                                        class="fa fa-facebook"></i> Facebook</a></li>
+                            <li><a href="https://www.instagram.com/lnscarz._?igsh=MTdoYXp4ZmlmMXpwYQ=="
+                                    target="_blank"><i class="fa fa-instagram"></i> Instagram @lnscarz._</a></li>
+                            <li><a href="https://www.tiktok.com/@lnscarz?_r=1&_t=ZS-9574dbZN3p3" target="_blank"><i
+                                        class="fa fa-music"></i> TikTok @lnscarz</a></li>
+                            <li><a href="https://wa.me/94754289843" target="_blank"><i class="fa fa-whatsapp"></i>
+                                    WhatsApp Us</a></li>
+                        </ul>
+                        <ul style="margin-top:14px;">
+                            <li><a href="{{ url_for('cars') }}"><i class="fa fa-angle-right"></i> Toyota</a></li>
+                            <li><a href="{{ url_for('cars') }}"><i class="fa fa-angle-right"></i> Honda</a></li>
+                            <li><a href="{{ url_for('cars') }}"><i class="fa fa-angle-right"></i> Nissan</a></li>
+                            <li><a href="{{ url_for('cars') }}"><i class="fa fa-angle-right"></i> Suzuki</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer__copyright__text">
+                <p>Copyright &copy;
+                    <script>document.write(new Date().getFullYear());</script> LNS CARz. All rights reserved. | Rev Up
+                    Your Ride! 🏎️ | Pelawatta, Sri Lanka
+                </p>
+            </div>
+        </div>
+    </footer>
+    <!-- Footer Section End -->
+
+    <!-- Search Begin -->
+    <div class="search-model">
+        <div class="h-100 d-flex align-items-center justify-content-center">
+            <div class="search-close-switch">+</div>
+            <form class="search-model-form">
+                <input type="text" id="search-input" placeholder="Search here.....">
+            </form>
+        </div>
+    </div>
+    <!-- Search End -->
+
+    <!-- Js Plugins -->
+    <script src="{{ url_for('static', filename='js/jquery-3.3.1.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.nice-select.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery-ui.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.magnific-popup.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/mixitup.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.slicknav.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/owl.carousel.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+
+</html>

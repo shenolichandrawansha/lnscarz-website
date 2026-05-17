@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<style>
+    .lns-header {
+        background: #111111;
+        position: relative;
+        z-index: 99;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.18);
+    }
+
+    .lns-header-top {
+        background: #0b0b0b;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        padding: 9px 0;
+    }
+
+    .lns-top-info {
+        display: flex;
+        align-items: center;
+        gap: 22px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        color: rgba(255, 255, 255, 0.72);
+        font-size: 13px;
+        font-weight: 700;
+    }
+
+    .lns-top-info i {
+        color: #e53935;
+        margin-right: 7px;
+    }
+
+    .lns-top-right {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 18px;
+    }
+
+    .lns-phone {
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 13px;
+        font-weight: 800;
+        white-space: nowrap;
+    }
+
+    .lns-phone i {
+        color: #e53935;
+        margin-right: 7px;
+    }
+
+    .lns-social {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .lns-social a {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.08);
+        color: #ffffff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 13px;
+        transition: all 0.25s ease;
+        text-decoration: none;
+    }
+
+    .lns-social a:hover {
+        background: #e53935;
+        color: #ffffff;
+        transform: translateY(-2px);
+    }
+
+    .lns-main-nav {
+        padding: 18px 0;
+    }
+
+    .lns-nav-wrap {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 28px;
+    }
+
+    .lns-logo {
+        color: #ffffff;
+        font-size: 28px;
+        font-weight: 900;
+        letter-spacing: 1px;
+        text-decoration: none;
+        white-space: nowrap;
+        line-height: 1;
+    }
+
+    .lns-logo:hover {
+        color: #ffffff;
+        text-decoration: none;
+    }
+
+    .lns-logo span {
+        color: #e53935;
+    }
+
+    .lns-menu {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 4px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        flex: 1;
+    }
+
+    .lns-menu>li {
+        position: relative;
+    }
+
+    .lns-menu>li>a {
+        display: block;
+        color: rgba(255, 255, 255, 0.86);
+        font-size: 14px;
+        font-weight: 900;
+        text-transform: uppercase;
+        letter-spacing: 0.7px;
+        padding: 12px 13px;
+        border-radius: 10px;
+        text-decoration: none;
+        transition: all 0.25s ease;
+    }
+
+    .lns-menu>li:hover>a,
+    .lns-menu>li.active>a {
+        background: rgba(229, 57, 53, 0.14);
+        color: #ffffff;
+    }
+
+    .lns-menu>li.active>a {
+        color: #e53935;
+    }
+
+    .lns-dropdown {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        min-width: 210px;
+        background: #ffffff;
+        border-radius: 12px;
+        padding: 10px;
+        list-style: none;
+        margin: 10px 0 0;
+        box-shadow: 0 14px 40px rgba(0, 0, 0, 0.18);
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(10px);
+        transition: all 0.25s ease;
+        z-index: 100;
+    }
+
+    .lns-menu>li:hover .lns-dropdown {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+
+    .lns-dropdown li a {
+        display: block;
+        padding: 10px 12px;
+        color: #222222;
+        font-size: 13px;
+        font-weight: 800;
+        border-radius: 8px;
+        text-decoration: none;
+        transition: all 0.2s ease;
+    }
+
+    .lns-dropdown li a:hover {
+        background: #fff5f5;
+        color: #e53935;
+    }
+
+    .lns-actions {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .lns-search-btn {
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.09);
+        color: #ffffff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        transition: all 0.25s ease;
+    }
+
+    .lns-search-btn:hover {
+        background: #e53935;
+        color: #ffffff;
+        text-decoration: none;
+    }
+
+    .lns-sell-btn {
+        height: 42px;
+        padding: 0 18px;
+        background: #e53935;
+        color: #ffffff;
+        border-radius: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 13px;
+        font-weight: 900;
+        text-transform: uppercase;
+        letter-spacing: 0.7px;
+        text-decoration: none;
+        box-shadow: 0 8px 20px rgba(229, 57, 53, 0.3);
+        transition: all 0.25s ease;
+        white-space: nowrap;
+    }
+
+    .lns-sell-btn:hover {
+        background: #b71c1c;
+        color: #ffffff;
+        text-decoration: none;
+        transform: translateY(-2px);
+    }
+
+    .lns-mobile-open {
+        display: none;
+        width: 42px;
+        height: 42px;
+        border-radius: 10px;
+        background: #e53935;
+        color: #ffffff;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        cursor: pointer;
+    }
+
+    @media (max-width: 991px) {
+        .lns-header-top {
+            display: none;
+        }
+
+        .lns-menu,
+        .lns-actions {
+            display: none;
+        }
+
+        .lns-mobile-open {
+            display: flex;
+        }
+
+        .lns-main-nav {
+            padding: 16px 0;
+        }
+
+        .lns-logo {
+            font-size: 24px;
+        }
+    }
+</style>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="About LNS CARz - Rev Up Your Ride! Sri Lanka's Trusted Car Partner">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | LNS CARz</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/font-awesome.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/elegant-icons.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/nice-select.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/magnific-popup.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/jquery-ui.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/owl.carousel.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/slicknav.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+    <div id="preloder">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Offcanvas Menu -->
+    <div class="offcanvas-menu-overlay"></div>
+    <div class="offcanvas-menu-wrapper">
+        <div class="offcanvas__widget"><a href="{{ url_for('sell') }}" class="primary-btn">Sell Your Car</a></div>
+        <div class="offcanvas__logo"><a href="{{ url_for('home') }}"><strong
+                    style="font-size:22px;color:#fff;font-weight:900;letter-spacing:1px;">LNS <span
+                        style="color:#e53935;">CARz</span></strong></a></div>
+        <div id="mobile-menu-wrap"></div>
+        <ul class="offcanvas__widget__add">
+            <li><i class="fa fa-clock-o"></i> Mon–Sat: 08:00 am – 06:00 pm</li>
+            <li><i class="fa fa-envelope-o"></i> lnscarz7@gmail.com</li>
+        </ul>
+        <div class="offcanvas__phone__num"><i class="fa fa-phone"></i><span>075 428 9843 / 077 883 5662</span></div>
+        <div class="offcanvas__social">
+            <a href="https://www.facebook.com/share/18AeLHQNXq/?mibextid=wwXIfr" target="_blank" title="Facebook"><i
+                    class="fa fa-facebook"></i></a>
+            <a href="https://www.instagram.com/lnscarz._?igsh=MTdoYXp4ZmlmMXpwYQ==" target="_blank" title="Instagram"><i
+                    class="fa fa-instagram"></i></a>
+            <a href="https://www.tiktok.com/@lnscarz?_r=1&_t=ZS-9574dbZN3p3" target="_blank" title="TikTok"><i
+                    class="fa fa-music"></i></a>
+            <a href="https://wa.me/94754289843" target="_blank" title="WhatsApp"><i class="fa fa-whatsapp"></i></a>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="lns-header">
+        <div class="lns-header-top">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-7">
+                        <ul class="lns-top-info">
+                            <li>
+                                <i class="fa fa-clock-o"></i>
+                                Mon–Sat: 08:00 am – 06:00 pm
+                            </li>
+                            <li>
+                                <i class="fa fa-envelope-o"></i>
+                                lnscarz7@gmail.com
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-5">
+                        <div class="lns-top-right">
+                            <div class="lns-phone">
+                                <i class="fa fa-phone"></i>
+                                075 428 9843 / 077 883 5662
+                            </div>
+
+                            <div class="lns-social">
+                                <a href="https://www.facebook.com/share/18AeLHQNXq/?mibextid=wwXIfr" target="_blank"
+                                    title="Facebook">
+                                    <i class="fa fa-facebook"></i>
+                                </a>
+                                <a href="https://www.instagram.com/lnscarz._?igsh=MTdoYXp4ZmlmMXpwYQ==" target="_blank"
+                                    title="Instagram">
+                                    <i class="fa fa-instagram"></i>
+                                </a>
+                                <a href="https://www.tiktok.com/@lnscarz?_r=1&_t=ZS-9574dbZN3p3" target="_blank"
+                                    title="TikTok">
+                                    <i class="fa fa-music"></i>
+                                </a>
+                                <a href="https://wa.me/94754289843" target="_blank" title="WhatsApp">
+                                    <i class="fa fa-whatsapp"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="lns-main-nav">
+            <div class="container">
+                <div class="lns-nav-wrap">
+                    <a href="{{ url_for('home') }}" class="lns-logo">
+                        LNS <span>CARz</span>
+                    </a>
+
+                    <ul class="lns-menu">
+                        <li class="{% if request.endpoint == 'home' %}active{% endif %}">
+                            <a href="{{ url_for('home') }}">Home</a>
+                        </li>
+
+                        <li class="{% if request.endpoint == 'cars' %}active{% endif %}">
+                            <a href="{{ url_for('cars') }}">Cars</a>
+                        </li>
+
+                        <li class="{% if request.endpoint == 'sell' %}active{% endif %}">
+                            <a href="{{ url_for('sell') }}">Sell Your Car</a>
+                        </li>
+
+                        <li>
+                            <a href="#">Services <i class="fa fa-angle-down" style="margin-left:5px;"></i></a>
+                            <ul class="lns-dropdown">
+                                <li>
+                                    <a href="{{ url_for('brokering') }}">Brokering Service</a>
+                                </li>
+                                <li>
+                                    <a href="{{ url_for('booking') }}">Book a Valuation</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li>
+                            <a href="#">Pages <i class="fa fa-angle-down" style="margin-left:5px;"></i></a>
+                            <ul class="lns-dropdown">
+                                <li>
+                                    <a href="{{ url_for('blog') }}">Blog</a>
+                                </li>
+                                <li>
+                                    <a href="{{ url_for('blog_details') }}">Blog Details</a>
+                                </li>
+                                <li>
+                                    <a href="{{ url_for('car_details') }}">Car Details</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="{% if request.endpoint == 'about' %}active{% endif %}">
+                            <a href="{{ url_for('about') }}">About</a>
+                        </li>
+
+                        <li class="{% if request.endpoint == 'contact' %}active{% endif %}">
+                            <a href="{{ url_for('contact') }}">Contact</a>
+                        </li>
+                    </ul>
+
+                    <div class="lns-actions">
+                        <a href="#" class="lns-search-btn search-switch">
+                            <i class="fa fa-search"></i>
+                        </a>
+
+                        <a href="{{ url_for('sell') }}" class="lns-sell-btn">
+                            Sell Your Car
+                        </a>
+                    </div>
+
+                    <div class="lns-mobile-open canvas__open">
+                        <span class="fa fa-bars"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb-option set-bg" data-setbg="{{ url_for('static', filename='img/breadcrumb-bg.jpg') }}">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="breadcrumb__text">
+                        <h2>About LNS CARz</h2>
+                        <div class="breadcrumb__links">
+                            <a href="{{ url_for('home') }}"><i class="fa fa-home"></i> Home</a>
+                            <span>About Us</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- About Section -->
+    <section class="about spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title about-title">
+                        <h2>Welcome to LNS CARz — Rev Up Your Ride! Sri Lanka's Trusted Car Partner</h2>
+                        <p>LNS CARz is your trusted partner in buying, modifying, and reselling vehicles — offering
+                            exceptional customer service. Specializing in top-notch vehicle sales, we cater to every car
+                            enthusiast's dream. We expertly match Sri Lankans with their ideal vehicles!</p>
+                    </div>
+                </div>
+            </div>
+            <div class="about__feature">
+                <div class="row">
+                    <div class="col-lg-4 col-md-6 col-sm-6">
+                        <div class="about__feature__item">
+                            <img src="{{ url_for('static', filename='img/about/af-1.png') }}" alt="">
+                            <h5>Quality Assurance</h5>
+                            <p>Every vehicle at LNS CARz is thoroughly inspected, repaired, and refurbished before being
+                                listed for sale. We guarantee quality.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-6">
+                        <div class="about__feature__item">
+                            <img src="{{ url_for('static', filename='img/about/af-2.png') }}" alt="">
+                            <h5>Transparent Pricing</h5>
+                            <p>No hidden fees, no surprises. We believe in honest and transparent pricing for all our
+                                vehicles and services.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-6">
+                        <div class="about__feature__item">
+                            <img src="{{ url_for('static', filename='img/about/af-3.png') }}" alt="">
+                            <h5>Expert Brokering</h5>
+                            <p>Our experienced team acts as trusted brokers, ensuring smooth and fair transactions
+                                between private buyers and sellers.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="about__pic">
+                        <img src="{{ url_for('static', filename='img/about/about-pic.jpg') }}" alt=""
+                            style="border-radius:10px;box-shadow:0 12px 40px rgba(0,0,0,0.12);">
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="margin-top:50px;">
+                <div class="col-lg-6 col-md-6">
+                    <div class="about__item">
+                        <h5><i class="fa fa-bullseye" style="color:#e53935;margin-right:8px;"></i> Our Mission</h5>
+                        <p>To provide Sri Lankans with access to quality, reliable, and affordable used vehicles through
+                            a transparent and customer-first buying, selling, and brokering experience. We believe every
+                            Sri Lankan deserves a vehicle they can trust at a price they can afford.</p>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <div class="about__item">
+                        <h5><i class="fa fa-eye" style="color:#e53935;margin-right:8px;"></i> Our Vision</h5>
+                        <p>To become Sri Lanka's most trusted automotive marketplace — where every customer walks away
+                            satisfied. We strive to set the gold standard in used vehicle sales, with a reputation built
+                            on honesty, expertise, and genuine care for our customers.</p>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <div class="about__item">
+                        <h5><i class="fa fa-star" style="color:#e53935;margin-right:8px;"></i> Our Values</h5>
+                        <p>Integrity, transparency, and customer satisfaction are at the heart of everything we do. We
+                            never compromise on quality — every vehicle is inspected, every price is fair, and every
+                            customer is treated like family.</p>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <div class="about__item">
+                        <h5><i class="fa fa-map-marker" style="color:#e53935;margin-right:8px;"></i> Visit Us</h5>
+                        <p>Find us at <strong>NO:272/D Robert Gunawardana Mw, Pelawatta, Sri Lanka</strong>. Our
+                            showroom is open Monday to Saturday, 8:00 AM – 6:00 PM. Call us on <strong>075 428
+                                9843</strong> or <strong>077 883 5662</strong> anytime.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Process Section -->
+            <div class="row" style="margin-top:60px;">
+                <div class="col-lg-12 text-center">
+                    <div class="section-title">
+                        <span>How We Work</span>
+                        <h2>Our Simple 4-Step Process</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="margin-top:30px;">
+                <div class="col-lg-3 col-md-6" style="text-align:center;padding:20px;">
+                    <div
+                        style="width:64px;height:64px;background:#e53935;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:24px;font-weight:900;color:#fff;">
+                        1</div>
+                    <h5 style="font-weight:800;font-size:16px;margin-bottom:10px;">Browse or Enquire</h5>
+                    <p style="font-size:13px;color:#727171;">Visit our showroom or browse online. Tell us what you're
+                        looking for — we'll find it.</p>
+                </div>
+                <div class="col-lg-3 col-md-6" style="text-align:center;padding:20px;">
+                    <div
+                        style="width:64px;height:64px;background:#e53935;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:24px;font-weight:900;color:#fff;">
+                        2</div>
+                    <h5 style="font-weight:800;font-size:16px;margin-bottom:10px;">Inspection & Valuation</h5>
+                    <p style="font-size:13px;color:#727171;">Every vehicle is fully inspected by our certified team. You
+                        receive a detailed condition and value report.</p>
+                </div>
+                <div class="col-lg-3 col-md-6" style="text-align:center;padding:20px;">
+                    <div
+                        style="width:64px;height:64px;background:#e53935;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:24px;font-weight:900;color:#fff;">
+                        3</div>
+                    <h5 style="font-weight:800;font-size:16px;margin-bottom:10px;">Transparent Agreement</h5>
+                    <p style="font-size:13px;color:#727171;">Clear pricing in LKR, honest negotiations, and zero hidden
+                        fees. What you see is what you pay.</p>
+                </div>
+                <div class="col-lg-3 col-md-6" style="text-align:center;padding:20px;">
+                    <div
+                        style="width:64px;height:64px;background:#e53935;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:24px;font-weight:900;color:#fff;">
+                        4</div>
+                    <h5 style="font-weight:800;font-size:16px;margin-bottom:10px;">Safe Handover</h5>
+                    <p style="font-size:13px;color:#727171;">Documents verified, payment secured, vehicle handed over.
+                        We're with you every step of the way.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Counter Section -->
+    <section class="counter set-bg spad" data-setbg="{{ url_for('static', filename='img/counter-bg.jpg') }}">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="counter__item">
+                        <h2>500+</h2>
+                        <p>Cars Sold</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="counter__item">
+                        <h2>300+</h2>
+                        <p>Happy Customers</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="counter__item">
+                        <h2>150+</h2>
+                        <p>Cars Available Now</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="counter__item">
+                        <h2>5+</h2>
+                        <p>Years Experience</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section Begin -->
+    <section class="team spad" style="background:#f5f5f5;">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="section-title">
+                        <span>Our Leadership</span>
+                        <h2>Meet The LNS CARz Team</h2>
+                        <p style="max-width:560px;margin:0 auto;">The passionate people behind Sri Lanka's most trusted
+                            automotive dealership — driving excellence every day.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center" style="margin-top:40px;">
+
+                <!-- Founder & CEO — Real Photo -->
+                <div class="col-lg-4 col-md-6" style="margin-bottom:28px;">
+                    <div style="background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,0.10);border-top:4px solid #e53935;transition:all 0.3s;"
+                        onmouseover="this.style.transform='translateY(-8px)';this.style.boxShadow='0 16px 48px rgba(229,57,53,0.2)'"
+                        onmouseout="this.style.transform='';this.style.boxShadow='0 8px 40px rgba(0,0,0,0.10)'">
+                        <div style="position:relative;overflow:hidden;height:320px;">
+                            <img src="{{ url_for('static', filename='img/about/founder.jpg') }}"
+                                alt="Lalith Chandrawansha — Founder & CEO"
+                                style="width:100%;height:100%;object-fit:cover;object-position:top;">
+                            <div
+                                style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.80) 0%,transparent 55%);">
+                            </div>
+                            <div style="position:absolute;bottom:0;left:0;right:0;padding:24px 20px;">
+                                <h5 style="font-size:18px;font-weight:900;color:#fff;margin:0 0 4px;">Lalith
+                                    Chandrawansha</h5>
+                                <span
+                                    style="font-size:12px;font-weight:700;letter-spacing:2px;color:#e53935;text-transform:uppercase;">Founder
+                                    &amp; CEO</span>
+                            </div>
+                        </div>
+                        <div style="padding:20px 24px;">
+                            <p style="font-size:13px;color:#666;line-height:1.8;margin-bottom:16px;">With years of
+                                experience in the Sri Lankan automotive industry, Lalith founded LNS CARz with a mission
+                                to bring honest, transparent, and quality vehicle trading to every Sri Lankan.</p>
+                            <div style="display:flex;gap:10px;">
+                                <a href="https://www.facebook.com/share/18AeLHQNXq/?mibextid=wwXIfr" target="_blank"
+                                    style="width:36px;height:36px;background:#1877f2;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:14px;text-decoration:none;transition:all 0.3s;"
+                                    onmouseover="this.style.transform='translateY(-3px)'"
+                                    onmouseout="this.style.transform=''"><i class="fa fa-facebook"></i></a>
+                                <a href="https://www.instagram.com/lnscarz._?igsh=MTdoYXp4ZmlmMXpwYQ==" target="_blank"
+                                    style="width:36px;height:36px;background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:14px;text-decoration:none;transition:all 0.3s;"
+                                    onmouseover="this.style.transform='translateY(-3px)'"
+                                    onmouseout="this.style.transform=''"><i class="fa fa-instagram"></i></a>
+                                <a href="https://wa.me/94754289843" target="_blank"
+                                    style="width:36px;height:36px;background:#25d366;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:14px;text-decoration:none;transition:all 0.3s;"
+                                    onmouseover="this.style.transform='translateY(-3px)'"
+                                    onmouseout="this.style.transform=''"><i class="fa fa-whatsapp"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Director — Real Photo -->
+                <div class="col-lg-4 col-md-6" style="margin-bottom:28px;">
+                    <div style="background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,0.10);border-top:4px solid #e53935;transition:all 0.3s;"
+                        onmouseover="this.style.transform='translateY(-8px)';this.style.boxShadow='0 16px 48px rgba(229,57,53,0.2)'"
+                        onmouseout="this.style.transform='';this.style.boxShadow='0 8px 40px rgba(0,0,0,0.10)'">
+                        <div style="position:relative;overflow:hidden;height:320px;">
+                            <img src="{{ url_for('static', filename='img/about/director.jpg') }}"
+                                alt="Nishal Chandrawansha — Director"
+                                style="width:100%;height:100%;object-fit:cover;object-position:top;">
+                            <div
+                                style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.80) 0%,transparent 55%);">
+                            </div>
+                            <div style="position:absolute;bottom:0;left:0;right:0;padding:24px 20px;">
+                                <h5 style="font-size:18px;font-weight:900;color:#fff;margin:0 0 4px;">Nishal
+                                    Chandrawansha</h5>
+                                <span
+                                    style="font-size:12px;font-weight:700;letter-spacing:2px;color:#e53935;text-transform:uppercase;">Director</span>
+                            </div>
+                        </div>
+                        <div style="padding:20px 24px;">
+                            <p style="font-size:13px;color:#666;line-height:1.8;margin-bottom:16px;">Nishal leads
+                                operations and business development at LNS CARz, ensuring every customer receives a
+                                seamless, professional experience from enquiry through to handover.</p>
+                            <div style="display:flex;gap:10px;">
+                                <a href="https://www.facebook.com/share/18AeLHQNXq/?mibextid=wwXIfr" target="_blank"
+                                    style="width:36px;height:36px;background:#1877f2;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:14px;text-decoration:none;transition:all 0.3s;"
+                                    onmouseover="this.style.transform='translateY(-3px)'"
+                                    onmouseout="this.style.transform=''"><i class="fa fa-facebook"></i></a>
+                                <a href="https://www.instagram.com/lnscarz._?igsh=MTdoYXp4ZmlmMXpwYQ==" target="_blank"
+                                    style="width:36px;height:36px;background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:14px;text-decoration:none;transition:all 0.3s;"
+                                    onmouseover="this.style.transform='translateY(-3px)'"
+                                    onmouseout="this.style.transform=''"><i class="fa fa-instagram"></i></a>
+                                <a href="https://wa.me/94754289843" target="_blank"
+                                    style="width:36px;height:36px;background:#25d366;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:14px;text-decoration:none;transition:all 0.3s;"
+                                    onmouseover="this.style.transform='translateY(-3px)'"
+                                    onmouseout="this.style.transform=''"><i class="fa fa-whatsapp"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <!-- Team Section End -->
+
+
+    <!-- Footer -->
+    <footer class="footer set-bg" data-setbg="{{ url_for('static', filename='img/footer-bg.jpg') }}">
+        <div class="container">
+            <div class="footer__contact">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6">
+                        <div class="footer__contact__title">
+                            <h2>Contact LNS CARz Today!</h2>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <div class="footer__contact__option">
+                            <div class="option__item"><i class="fa fa-phone"></i> 075 428 9843 / 077 883 5662</div>
+                            <div class="option__item email"><i class="fa fa-envelope-o"></i> lnscarz7@gmail.com</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-4">
+                    <div class="footer__about">
+                        <div class="footer__logo">
+                            <a href="{{ url_for('home') }}"><img
+                                    src="{{ url_for('static', filename='img/lns-carz-logo.png') }}" alt="LNS CARZ"
+                                    style="height:80px;background:#fff;border-radius:50%;padding:5px;"></a>
+                        </div>
+                        <p>Sri Lanka's trusted destination for buying, selling, and brokering quality used vehicles.</p>
+                        <div class="footer__social">
+                            <a href="https://www.facebook.com/share/18AeLHQNXq/?mibextid=wwXIfr" target="_blank"
+                                class="facebook"><i class="fa fa-facebook"></i></a>
+                            <a href="https://www.instagram.com/lnscarz._?igsh=MTdoYXp4ZmlmMXpwYQ==" target="_blank"
+                                class="twitter"><i class="fa fa-instagram"></i></a>
+                            <a href="https://wa.me/94754289843" target="_blank" class="google"><i
+                                    class="fa fa-whatsapp"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 offset-lg-1 col-md-3">
+                    <div class="footer__widget">
+                        <h5>Quick Links</h5>
+                        <ul>
+                            <li><a href="{{ url_for('home') }}"><i class="fa fa-angle-right"></i> Home</a></li>
+                            <li><a href="{{ url_for('cars') }}"><i class="fa fa-angle-right"></i> Browse Cars</a></li>
+                            <li><a href="{{ url_for('sell') }}"><i class="fa fa-angle-right"></i> Sell Your Car</a></li>
+                            <li><a href="{{ url_for('about') }}"><i class="fa fa-angle-right"></i> About Us</a></li>
+                            <li><a href="{{ url_for('contact') }}"><i class="fa fa-angle-right"></i> Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-3">
+                    <div class="footer__widget">
+                        <h5>Services</h5>
+                        <ul>
+                            <li><a href="{{ url_for('cars') }}"><i class="fa fa-angle-right"></i> Buy a Car</a></li>
+                            <li><a href="{{ url_for('sell') }}"><i class="fa fa-angle-right"></i> Sell a Car</a></li>
+                            <li><a href="{{ url_for('brokering') }}"><i class="fa fa-angle-right"></i> Brokering</a>
+                            </li>
+                            <li><a href="{{ url_for('booking') }}"><i class="fa fa-angle-right"></i> Book Valuation</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer__brand">
+                        <h5>Car Brands</h5>
+                        <ul>
+                            <li><a href="#"><i class="fa fa-angle-right"></i> Toyota</a></li>
+                            <li><a href="#"><i class="fa fa-angle-right"></i> Honda</a></li>
+                            <li><a href="#"><i class="fa fa-angle-right"></i> Nissan</a></li>
+                            <li><a href="#"><i class="fa fa-angle-right"></i> Suzuki</a></li>
+                        </ul>
+                        <ul>
+                            <li><a href="#"><i class="fa fa-angle-right"></i> BMW</a></li>
+                            <li><a href="#"><i class="fa fa-angle-right"></i> Mercedes</a></li>
+                            <li><a href="#"><i class="fa fa-angle-right"></i> Audi</a></li>
+                            <li><a href="#"><i class="fa fa-angle-right"></i> Mitsubishi</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer__copyright__text">
+                <p>Copyright &copy;
+                    <script>document.write(new Date().getFullYear());</script> LNS CARz. All rights reserved.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <div class="search-model">
+        <div class="h-100 d-flex align-items-center justify-content-center">
+            <div class="search-close-switch">+</div>
+            <form class="search-model-form">
+                <input type="text" id="search-input" placeholder="Search cars by brand, model...">
+            </form>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/jquery-3.3.1.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.nice-select.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery-ui.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.magnific-popup.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/mixitup.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.slicknav.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/owl.carousel.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+
+</html>
